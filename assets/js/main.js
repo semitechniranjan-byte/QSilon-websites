@@ -107,6 +107,64 @@
       onerror="this.parentElement.classList.remove('has-img');this.outerHTML=this.nextElementSibling.innerHTML"/><template>${fallback}</template>`;
   };
 
+  /* -------------------------------- Blog --------------------------------- */
+  const BLOG = window.BLOG || { posts: [] };
+  const blogPosts = () => [...BLOG.posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const fmtDate = (d) => new Date(d + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  const readTime = (p) => {
+    const words = p.content.map((b) => [b.h, b.p, b.tip, ...(b.ul || [])].join(" ")).join(" ").split(/\s+/).length;
+    return Math.max(2, Math.round(words / 200));
+  };
+  const postMeta = (p) => `<span>${icon("clock")} ${fmtDate(p.date)}</span><span>${icon("eye")} ${readTime(p)} min read</span>`;
+  const cover = (p) => `<div class="post-cover" data-cat="${esc(p.category)}"><span class="pc-orb"></span><span class="pc-orb b"></span><div class="pc-ic">${icon(p.icon)}</div></div>`;
+  const postCard = (p, i) => `
+    <a class="card post-card reveal" style="--i:${i}" href="blog.html?post=${esc(p.slug)}" data-cat="${esc(p.category)}" data-text="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
+      ${cover(p)}
+      <span class="tag">${esc(p.category)}</span>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.excerpt)}</p>
+      <div class="post-meta">${postMeta(p)}</div>
+    </a>`;
+  const blogArticle = (p, posts) => {
+    const url = location.origin + location.pathname + "?post=" + encodeURIComponent(p.slug);
+    const body = p.content
+      .map((b) =>
+        b.h ? `<h2>${esc(b.h)}</h2>`
+        : b.ul ? `<ul>${b.ul.map((li) => `<li>${icon("tick")}<span>${esc(li)}</span></li>`).join("")}</ul>`
+        : b.tip ? `<aside class="post-tip">${icon("spark")}<p>${esc(b.tip)}</p></aside>`
+        : `<p>${esc(b.p)}</p>`)
+      .join("");
+    const related = [...posts.filter((x) => x.slug !== p.slug && x.category === p.category), ...posts.filter((x) => x.slug !== p.slug && x.category !== p.category)].slice(0, 3);
+    return `
+      <section class="section blog-sec">
+        <div class="container narrow">
+          <article class="post reveal">
+            <a class="more back" href="blog.html">← All articles</a>
+            <span class="tag">${esc(p.category)}</span>
+            <h1>${esc(p.title)}</h1>
+            <div class="post-meta big"><span>${icon("users")} ${esc(BLOG.author || S.brand.name)}</span>${postMeta(p)}</div>
+            <div class="detail-art glass post-hero">${p.mockup && MOCKUPS[p.mockup] ? MOCKUPS[p.mockup](icon) : cover(p)}</div>
+            <div class="post-body">${body}</div>
+            <div class="post-share">
+              <span>Share this article</span>
+              <a href="https://wa.me/?text=${encodeURIComponent(p.title + " " + url)}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">${icon("whatsapp")}</a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">${icon("linkedin")}</a>
+              <button class="copy-link" data-url="${esc(url)}" aria-label="Copy link">${icon("send")}<em>Copy link</em></button>
+            </div>
+            <div class="post-cta">
+              <div><h3>Want this for your business?</h3><p>Get a free consultation with our team.</p></div>
+              <a class="btn btn-primary" href="contact.html">Talk to an expert ${icon("arrow")}</a>
+            </div>
+          </article>
+        </div>
+        ${related.length ? `
+        <div class="container">
+          <div class="sec-head reveal related-head"><h2>Related <span class="grad">articles</span></h2></div>
+          <div class="grid g3">${related.map((r, i) => postCard(r, i)).join("")}</div>
+        </div>` : ""}
+      </section>`;
+  };
+
   /* ------------------------------ Sections ------------------------------- */
   const SECTIONS = {
     hero() {
@@ -176,6 +234,7 @@
           ${head(s)}
           <div class="grid g4">
             ${s.items
+              .slice(0, s.homeLimit || s.items.length)
               .map(
                 (x, i) => `
               <a class="card svc reveal${x.featured ? " featured" : ""}" style="--i:${i}" href="services.html#${esc(x.id)}">
@@ -189,6 +248,7 @@
               )
               .join("")}
           </div>
+          ${s.homeLimit && s.items.length > s.homeLimit ? `<div class="center reveal"><a class="btn btn-ghost" href="services.html">View all ${s.items.length} services ${icon("arrow")}</a></div>` : ""}
         </div>
       </section>`;
     },
@@ -211,58 +271,6 @@
                 <p class="lead">${esc(x.text)}</p>
                 <ul class="checks">${x.features.map((f) => `<li>${icon("tick")} ${esc(f)}</li>`).join("")}</ul>
                 <a class="btn btn-primary" href="contact.html?service=${encodeURIComponent(x.title)}">Discuss ${esc(x.title)} ${icon("arrow")}</a>
-              </div>
-            </article>`
-            )
-            .join("")}
-        </div>
-      </section>`;
-    },
-
-    solutions() {
-      const s = S.solutions;
-      return `
-      <section class="section alt">
-        <div class="container">
-          ${head(s)}
-          <div class="grid g3">
-            ${s.items
-              .map(
-                (x, i) => `
-              <div class="card sol reveal${x.featured ? " featured" : ""}" style="--i:${i}">
-                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span></div>
-                <h3>${esc(x.title)}</h3>
-                <p>${esc(x.text)}</p>
-                <div class="chips">${x.modules.slice(0, x.featured ? 6 : 4).map((m) => `<span>${esc(m)}</span>`).join("")}</div>
-              </div>`
-              )
-              .join("")}
-          </div>
-          <div class="center reveal"><a class="btn btn-ghost" href="solutions.html">All solutions ${icon("arrow")}</a></div>
-        </div>
-      </section>`;
-    },
-
-    solutionDetails() {
-      return `
-      <section class="section">
-        <div class="container stack">
-          ${S.solutions.items
-            .map(
-              (x, i) => `
-            <article class="detail reveal ${i % 2 ? "flip" : ""}" id="${slug(x.title)}">
-              <div class="detail-art glass${x.image ? " has-img" : ""}">
-                ${detailVisual(x)}
-                <span class="num">0${i + 1}</span>
-              </div>
-              <div class="detail-copy">
-                <span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span>
-                <h2>${esc(x.title)}</h2>
-                <p class="lead">${esc(x.text)}</p>
-                <ul class="checks">${x.modules.map((m) => `<li>${icon("tick")} ${esc(m)}</li>`).join("")}</ul>
-                <div class="btn-row">
-                  <a class="btn btn-primary" href="contact.html?service=${encodeURIComponent(x.title)}">Request a demo ${icon("arrow")}</a>
-                </div>
               </div>
             </article>`
             )
@@ -507,6 +515,53 @@
       </section>`;
     },
 
+    blogLatest() {
+      const posts = blogPosts().slice(0, 3);
+      if (!posts.length) return "";
+      return `
+      <section class="section alt">
+        <div class="container">
+          ${head({ eyebrow: "From our blog", title: "Latest <span class='grad'>insights</span>", text: "Practical guides on AI, automation and business software." })}
+          <div class="grid g3">${posts.map((p, i) => postCard(p, i)).join("")}</div>
+          <div class="center reveal"><a class="btn btn-ghost" href="blog.html">Read all articles ${icon("arrow")}</a></div>
+        </div>
+      </section>`;
+    },
+
+    blog() {
+      const posts = blogPosts();
+      const slugParam = new URLSearchParams(location.search).get("post");
+      const post = slugParam && posts.find((p) => p.slug === slugParam);
+      if (post) return blogArticle(post, posts);
+      const cats = ["All", ...new Set(posts.map((p) => p.category))];
+      const [first, ...rest] = posts;
+      return `
+      <section class="section blog-sec">
+        <div class="container">
+          ${slugParam ? `<p class="blog-missing reveal">That article was not found — here are all our posts.</p>` : ""}
+          ${first ? `
+          <a class="blog-featured reveal" href="blog.html?post=${esc(first.slug)}" data-cat="${esc(first.category)}">
+            <div class="detail-art glass">${first.mockup && MOCKUPS[first.mockup] ? MOCKUPS[first.mockup](icon) : cover(first)}</div>
+            <div class="bf-copy">
+              <span class="tag">${esc(first.category)}</span>
+              <h2>${esc(first.title)}</h2>
+              <p class="lead">${esc(first.excerpt)}</p>
+              <div class="post-meta">${postMeta(first)}</div>
+              <span class="more">Read article ${icon("arrow")}</span>
+            </div>
+          </a>` : ""}
+          <div class="blog-tools reveal">
+            <div class="blog-cats" role="tablist" aria-label="Filter by category">
+              ${cats.map((c, i) => `<button class="blog-cat${i ? "" : " on"}" data-cat="${esc(c)}">${esc(c)}</button>`).join("")}
+            </div>
+            <label class="blog-search">${icon("search")}<input type="search" placeholder="Search articles…" aria-label="Search articles"/></label>
+          </div>
+          <div class="grid g3 blog-grid">${rest.map((p, i) => postCard(p, i)).join("")}</div>
+          <p class="blog-empty" hidden>No articles match your search.</p>
+        </div>
+      </section>`;
+    },
+
     values() {
       const s = S.values;
       return `
@@ -591,7 +646,7 @@
     contact() {
       const c = S.contact;
       const cs = S.contactSection;
-      const options = [...S.services.items.map((x) => x.title), ...S.solutions.items.map((x) => x.title), "Other"];
+      const options = [...S.services.items.map((x) => x.title), "Other"];
       const unique = [...new Set(options)];
       const infos = [
         { icon: "mail", label: "Email us", value: c.email, href: `mailto:${c.email}` },
@@ -718,6 +773,14 @@
 
   const pageTitle = (S.nav.find((n) => n.page === page) || {}).label;
   document.title = page === "home" ? `${S.brand.name} — ${S.brand.tagline}` : `${pageTitle} — ${S.brand.name}`;
+  const openPost = page === "blog" && BLOG.posts.find((p) => p.slug === new URLSearchParams(location.search).get("post"));
+  if (openPost) {
+    document.title = `${openPost.title} — ${S.brand.name}`;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", openPost.excerpt);
+    const ph = document.querySelector(".page-header");
+    if (ph) ph.remove(); // the article has its own title
+  }
 
   /* ----------------------------- Behaviours ------------------------------ */
   const $ = (q, el = document) => el.querySelector(q);
@@ -952,6 +1015,46 @@
     show(0);
     start();
   });
+
+  // Blog: category filter + search
+  const blogGrid = $(".blog-grid");
+  if (blogGrid) {
+    let cat = "All", q = "";
+    const cards = $$(".post-card", blogGrid);
+    const featured = $(".blog-featured");
+    const empty = $(".blog-empty");
+    const apply = () => {
+      let shown = 0;
+      cards.forEach((c) => {
+        const ok = (cat === "All" || c.dataset.cat === cat) && (!q || c.dataset.text.includes(q));
+        c.hidden = !ok;
+        if (ok) { shown++; c.classList.add("in"); }
+      });
+      if (featured) {
+        const fOk = (cat === "All" || featured.dataset.cat === cat) && (!q || featured.textContent.toLowerCase().includes(q));
+        featured.hidden = !fOk;
+        if (fOk) shown++;
+      }
+      empty.hidden = shown > 0;
+    };
+    $$(".blog-cat").forEach((b) =>
+      b.addEventListener("click", () => {
+        $$(".blog-cat").forEach((x) => x.classList.toggle("on", x === b));
+        cat = b.dataset.cat;
+        apply();
+      })
+    );
+    $(".blog-search input").addEventListener("input", (e) => {
+      q = e.target.value.trim().toLowerCase();
+      apply();
+    });
+  }
+  $$(".copy-link").forEach((b) =>
+    b.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(b.dataset.url); b.querySelector("em").textContent = "Copied!"; }
+      catch (e) { prompt("Copy this link:", b.dataset.url); }
+    })
+  );
 
   // Scroll to hash after dynamic render
   if (location.hash) {

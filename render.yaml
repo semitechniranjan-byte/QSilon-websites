@@ -15,8 +15,15 @@ services:
         source: /services
         destination: /services.html
       - type: rewrite
+        source: /blog
+        destination: /blog.html
+      # Solutions page was merged into Services
+      - type: redirect
         source: /solutions
-        destination: /solutions.html
+        destination: /services.html
+      - type: redirect
+        source: /solutions.html
+        destination: /services.html
       - type: rewrite
         source: /about
         destination: /about.html

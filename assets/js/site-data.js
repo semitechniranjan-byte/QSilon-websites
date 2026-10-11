@@ -46,19 +46,19 @@ window.SITE = {
 
   nav: [
     { label: "Home", href: "index.html", page: "home" },
-    { label: "Services", href: "services.html", page: "services" },
-    { label: "Solutions", href: "solutions.html", page: "solutions" },
     { label: "About", href: "about.html", page: "about" },
+    { label: "Services", href: "services.html", page: "services" },
     { label: "Contact", href: "contact.html", page: "contact" },
+    { label: "Blog", href: "blog.html", page: "blog" },
   ],
 
   /* ---------- Page layouts: list section names in display order ---------- */
   pages: {
-    home: ["hero", "techStrip", "services", "showcase", "solutions", "stats", "process", "industries", "whyUs", "faq", "cta"],
-    services: ["pageHeader", "serviceDetails", "process", "techStack", "cta"],
-    solutions: ["pageHeader", "solutionDetails", "industries", "faq", "cta"],
+    home: ["hero", "techStrip", "services", "showcase", "stats", "process", "industries", "whyUs", "blogLatest", "faq", "cta"],
+    services: ["pageHeader", "serviceDetails", "industries", "process", "techStack", "cta"],
     about: ["pageHeader", "about", "missionVision", "teamWork", "expertise", "values", "stats", "whyUs", "cta"],
     contact: ["pageHeader", "contact", "nextSteps", "faq"],
+    blog: ["pageHeader", "blog", "cta"],
   },
 
   /* ---------- Per-page headers (used by the "pageHeader" section) ---------- */
@@ -68,10 +68,10 @@ window.SITE = {
       title: "Services built for <span class='grad'>real business outcomes</span>",
       text: "From AI automations to complete ERP rollouts, we design, build and support software that your team actually uses.",
     },
-    solutions: {
-      eyebrow: "Ready-to-deploy platforms",
-      title: "Solutions that <span class='grad'>run your operations</span>",
-      text: "Proven platforms we customise to your workflows — deployed fast, owned by you.",
+    blog: {
+      eyebrow: "Blog",
+      title: "Insights on <span class='grad'>software & AI automation</span>",
+      text: "Practical guides on AI voice agents, ERP, school management, automation and websites — written for business owners.",
     },
     about: {
       eyebrow: "About us",
@@ -106,6 +106,7 @@ window.SITE = {
     eyebrow: "Our services",
     title: "Everything your business needs to <span class='grad'>go digital</span>",
     text: "One partner for software, automation and web — from idea to launch and beyond.",
+    homeLimit: 9, // how many services to show on the Home page (the rest are on the Services page)
     items: [
       {
         id: "ai-voice",
@@ -172,71 +173,21 @@ window.SITE = {
         text: "Research-driven product design — wireframes, prototypes and design systems that users love.",
         features: ["User research", "Wireframes & prototypes", "Design systems", "Usability testing", "Brand identity"],
       },
-    ],
-  },
-
-  solutions: {
-    eyebrow: "Solutions",
-    title: "Ready platforms, <span class='grad'>customised for you</span>",
-    text: "Start faster with our proven platforms and tailor every module to your process.",
-    items: [
       {
-        icon: "voice",
-        tag: "Voice AI",
-        mockup: "ai-voice", // animated screen from assets/js/mockups.js
-        featured: true,
-        badge: "New",
-        title: "AI Voice Calling Platform",
-        text: "Deploy AI voice agents on your business number. They call customers, answer enquiries, book appointments and update your CRM automatically — thousands of calls a day with a natural human voice.",
-        modules: ["Outbound Campaigns", "Inbound Call Bot", "Appointment Booking", "Payment Reminders", "Multilingual Voices", "Call Analytics"],
-      },
-      {
-        icon: "layers",
-        tag: "ERP",
-        mockup: "erp", // animated screen from assets/js/mockups.js
-        title: "Business ERP Suite",
-        text: "Manufacturing, trading and service businesses run inventory, finance, HR and sales from a single dashboard.",
-        modules: ["Inventory", "Accounts & GST", "HR & Payroll", "Sales & CRM", "Purchase", "Reports"],
-      },
-      {
-        icon: "school",
-        tag: "Education",
-        mockup: "school-management", // animated screen from assets/js/mockups.js
-        title: "School & College Management",
-        text: "Digitise your entire institution with web and mobile apps for admins, teachers, students and parents.",
-        modules: ["Admissions", "Fees", "Attendance", "Exams", "Transport", "Library", "Parent App"],
-      },
-      {
-        icon: "bot",
-        tag: "AI",
-        mockup: "ai-automation", // animated screen from assets/js/mockups.js
-        title: "AI Automation Platform",
-        text: "Deploy AI agents that answer customers, qualify leads, process documents and trigger workflows 24/7.",
-        modules: ["Chatbots", "Voice Agents", "Doc AI", "Lead Scoring", "WhatsApp Bots"],
-      },
-      {
-        icon: "cart",
-        tag: "Commerce",
-        mockup: "websites", // animated screen from assets/js/mockups.js
-        title: "E-commerce & Web Platforms",
-        text: "High-converting online stores and business websites with payments, inventory sync and analytics.",
-        modules: ["Storefront", "Payments", "Inventory Sync", "SEO", "Analytics"],
-      },
-      {
+        id: "hospital-management",
         icon: "hospital",
-        tag: "Healthcare",
         mockup: "hospital", // animated screen from assets/js/mockups.js
         title: "Hospital & Clinic Management",
-        text: "Appointments, patient records, billing, pharmacy and lab management in one secure system.",
-        modules: ["OPD / IPD", "EMR", "Billing", "Pharmacy", "Lab"],
+        text: "Appointments, OPD token queue, patient records, billing, pharmacy and lab reports in one secure system.",
+        features: ["OPD / IPD & token queue", "Patient records (EMR)", "Billing & pharmacy", "Lab reports with SMS alerts", "Doctor schedules & appointments"],
       },
       {
+        id: "hrms-payroll",
         icon: "users",
-        tag: "HR",
-        mockup: "hrms", // animated screen from assets/js/mockups.js
+        mockup: "hrms",
         title: "HRMS & Payroll",
-        text: "Attendance, leave, payroll, performance and employee self-service — all automated.",
-        modules: ["Attendance", "Leave", "Payroll", "Appraisals", "Self-service"],
+        text: "Attendance, leave, payroll, appraisals and an employee self-service app — all automated.",
+        features: ["Attendance & biometric integration", "Leave management", "Payroll & payslips", "Statutory compliance (PF, ESI, TDS)", "Performance appraisals", "Employee self-service app"],
       },
     ],
   },
@@ -272,8 +223,8 @@ window.SITE = {
   // Update with your real numbers. Plain text values (e.g. "24/7") are shown as-is;
   // numeric values animate as counters.
   stats: [
-    { value: 9, suffix: "+", label: "Service lines" },
-    { value: 7, suffix: "+", label: "Industry solutions" },
+    { value: 11, suffix: "+", label: "Services" },
+    { value: 8, suffix: "+", label: "Industries served" },
     { value: 100, suffix: "%", label: "Custom-built code" },
     { value: "24/7", label: "Support & monitoring" },
   ],
@@ -387,7 +338,7 @@ window.SITE = {
     title: "Ready to automate and grow your business?",
     text: "Book a free consultation and get a tailored plan for your ERP, school system, website or AI automation.",
     primary: { label: "Start your project", href: "contact.html" },
-    secondary: { label: "View solutions", href: "solutions.html" },
+    secondary: { label: "Explore services", href: "services.html" },
   },
 
   contactSection: {

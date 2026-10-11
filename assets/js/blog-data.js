@@ -1,0 +1,200 @@
+/* ==========================================================================
+   QSilon Tensorv — BLOG POSTS
+   --------------------------------------------------------------------------
+   Add a new article by copying one object below and editing it.
+   - slug:    used in the link (blog.html?post=your-slug) — lowercase, dashes
+   - date:    YYYY-MM-DD
+   - icon:    any icon name from assets/js/main.js
+   - mockup:  animated screen shown at the top of the article (optional)
+   - content: list of blocks — { h: "Heading" }, { p: "Paragraph" },
+              { ul: ["point", "point"] }, { tip: "Highlighted note" }
+   Newest posts are shown first automatically.
+   ========================================================================== */
+window.BLOG = {
+  author: "QSilon Tensorv Team",
+  posts: [
+    {
+      slug: "ai-voice-agents-for-business-calls",
+      title: "AI Voice Agents: How Businesses Are Automating Phone Calls",
+      category: "AI Voice",
+      icon: "voice",
+      mockup: "ai-voice",
+      date: "2026-10-06",
+      excerpt:
+        "Missed calls mean missed customers. Here is how AI voice agents answer, call back and follow up 24/7 — and how to know if your business is ready for one.",
+      content: [
+        { p: "For many businesses the phone is still where sales happen. But teams are busy, calls arrive after hours, and follow-ups slip. An AI voice agent is software that talks to customers on the phone in a natural voice — it can answer incoming calls, call leads back, book appointments and update your records automatically." },
+        { h: "What an AI voice agent can do" },
+        { ul: [
+          "Answer incoming calls 24/7 and handle common questions",
+          "Call new leads within minutes of an enquiry",
+          "Book, confirm and reschedule appointments",
+          "Send payment and renewal reminders",
+          "Speak Hindi, English and regional languages",
+          "Log every call with a recording, transcript and summary in your CRM",
+        ] },
+        { h: "Where it works best" },
+        { p: "Voice agents shine wherever calls are frequent and follow a pattern: clinics confirming appointments, real-estate teams qualifying leads, schools reminding parents about fees, and service businesses booking visits. The agent handles the routine conversations, and transfers the call to a person when a customer needs one." },
+        { h: "How to get started" },
+        { ul: [
+          "List the 3–5 call types your team handles most often",
+          "Write down the questions customers ask and the right answers",
+          "Decide when the AI should hand over to a human",
+          "Start with one use case, measure results, then expand",
+        ] },
+        { tip: "Start small: automate one repetitive call type first, such as appointment confirmations. It is the fastest way to see the value before scaling up." },
+        { p: "Want to hear how an AI voice agent would sound for your business? Contact us for a free demo call in your language." },
+      ],
+    },
+    {
+      slug: "signs-your-business-needs-an-erp",
+      title: "7 Signs Your Business Has Outgrown Spreadsheets and Needs an ERP",
+      category: "ERP",
+      icon: "layers",
+      mockup: "erp",
+      date: "2026-09-28",
+      excerpt:
+        "Spreadsheets are great — until stock, billing and reports live in ten different files. These signs tell you it is time for an ERP.",
+      content: [
+        { p: "Most growing businesses start with spreadsheets and accounting software. That works well in the early days. But as orders, staff and locations grow, data gets scattered and mistakes become expensive. An ERP (Enterprise Resource Planning) system brings inventory, sales, purchase, finance and HR into one place." },
+        { h: "The 7 warning signs" },
+        { ul: [
+          "Nobody is sure how much stock you actually have",
+          "The same data is typed into multiple files",
+          "Month-end reports take days to prepare",
+          "Invoices and GST filings need manual checking",
+          "You cannot see profit by product, customer or branch",
+          "Purchase orders are raised late because low stock was missed",
+          "Only one or two people know how the files work",
+        ] },
+        { h: "What changes with an ERP" },
+        { p: "With an ERP, every sale updates stock and accounts automatically. Low-stock items trigger purchase orders. Managers see live dashboards instead of waiting for reports. And because everyone works on the same system, there is one version of the truth." },
+        { h: "Choosing the right ERP" },
+        { ul: [
+          "Pick modules you need now, and add more later",
+          "Make sure it fits your process — not the other way around",
+          "Check GST, e-invoicing and Tally integration if you need them",
+          "Ask for training and support after go-live",
+        ] },
+        { tip: "A custom-fit ERP does not have to be a big-bang project. Many businesses start with inventory and billing, then add HR, purchase and reports in phases." },
+      ],
+    },
+    {
+      slug: "school-management-system-checklist",
+      title: "Choosing a School Management System: A Checklist for Principals",
+      category: "Education",
+      icon: "school",
+      mockup: "school-management",
+      date: "2026-09-19",
+      excerpt:
+        "Admissions, fees, attendance, exams and parent communication — what a modern school management system should cover, and the questions to ask before you buy.",
+      content: [
+        { p: "Schools handle a huge amount of information every day — student records, attendance, timetables, fees, exams and constant communication with parents. A good school management system puts all of it in one place, saves staff hours every week and keeps parents informed." },
+        { h: "Core modules to look for" },
+        { ul: [
+          "Admissions and student records",
+          "Online fee collection with automatic reminders",
+          "Attendance for students and staff",
+          "Timetable and substitution management",
+          "Exams, marks entry and report cards",
+          "Parent and teacher mobile apps",
+          "Transport with live bus tracking",
+        ] },
+        { h: "Questions to ask before choosing" },
+        { ul: [
+          "Can it match our report-card format and grading system?",
+          "Does the parent app work well on low-end phones?",
+          "How is student data secured and backed up?",
+          "Will the vendor train our teachers and office staff?",
+          "Can we start with a few modules and add more later?",
+        ] },
+        { h: "The biggest win: parent communication" },
+        { p: "When parents get attendance alerts, homework, fee reminders and results on their phone, calls to the school office drop sharply and fee collection becomes faster. It also builds trust — parents feel connected to their child's progress." },
+        { tip: "Plan the rollout around the school calendar. Starting at the beginning of a term makes data entry and training much easier." },
+      ],
+    },
+    {
+      slug: "whatsapp-automation-workflows",
+      title: "5 WhatsApp Automation Workflows Every Small Business Should Use",
+      category: "Automation",
+      icon: "whatsapp",
+      mockup: "ai-automation",
+      date: "2026-09-10",
+      excerpt:
+        "Your customers already live on WhatsApp. These five simple automations reply faster, collect payments and bring customers back — without extra staff.",
+      content: [
+        { p: "WhatsApp is often the first place customers reach out. Replying manually works for a few chats a day, but it does not scale. With automation connected to your CRM or ERP, WhatsApp becomes a 24/7 sales and support channel." },
+        { h: "1. Instant replies to new enquiries" },
+        { p: "Greet every new customer immediately, share your catalogue or price list and ask a couple of questions to understand what they need." },
+        { h: "2. Orders and invoices" },
+        { p: "Let customers place orders in chat. The system checks stock, creates the order and sends an invoice with a payment link automatically." },
+        { h: "3. Payment reminders" },
+        { p: "Send polite, scheduled reminders for pending payments, with a one-tap UPI link. Collection improves without awkward follow-up calls." },
+        { h: "4. Appointment booking and reminders" },
+        { p: "Clinics, salons and service businesses can let customers pick a slot, then send reminders before the visit to reduce no-shows." },
+        { h: "5. Feedback and repeat orders" },
+        { p: "After delivery, ask for a rating. A few weeks later, remind customers to reorder their regular items." },
+        { tip: "Always use the official WhatsApp Business Platform for automation, and send promotional messages only to customers who have opted in." },
+      ],
+    },
+    {
+      slug: "business-website-that-converts",
+      title: "What Makes a Business Website Bring In Customers? 8 Essentials",
+      category: "Websites",
+      icon: "globe",
+      mockup: "websites",
+      date: "2026-08-30",
+      excerpt:
+        "A beautiful website is not enough — it has to load fast, rank on Google and turn visitors into enquiries. Here are the 8 things that matter most.",
+      content: [
+        { p: "Your website is often the first impression a customer has of your business. Visitors decide within seconds whether to stay. A website that brings in customers is fast, clear and built around one goal: getting the visitor to take the next step." },
+        { h: "The 8 essentials" },
+        { ul: [
+          "Loads in under 3 seconds, especially on mobile",
+          "A clear headline that says what you do and for whom",
+          "One obvious call to action on every page",
+          "Click-to-call and WhatsApp buttons for mobile visitors",
+          "Real photos, case studies and client reviews",
+          "Simple contact forms with only the fields you need",
+          "SEO basics: page titles, descriptions and local business listing",
+          "Analytics so you know where enquiries come from",
+        ] },
+        { h: "Mobile first" },
+        { p: "Most visitors arrive on a phone. Design for small screens first: large buttons, short paragraphs and forms that are easy to fill with a thumb." },
+        { h: "Keep improving" },
+        { p: "A website is never truly finished. Review your analytics every month, see which pages bring enquiries, and improve the ones that do not." },
+        { tip: "Add a WhatsApp chat button and a short enquiry form on every page. Making it easy to contact you is the simplest way to get more leads." },
+      ],
+    },
+    {
+      slug: "automate-hr-and-payroll",
+      title: "HR and Payroll Automation: Save Hours Every Month",
+      category: "HRMS",
+      icon: "users",
+      mockup: "hrms",
+      date: "2026-08-21",
+      excerpt:
+        "Attendance sheets, leave requests and salary calculations eat up days every month. Here is how an HRMS automates them — accurately.",
+      content: [
+        { p: "In many companies, HR spends the last week of every month collecting attendance, checking leave and calculating salaries by hand. It is slow, stressful and error-prone. An HRMS (Human Resource Management System) automates the routine work so HR can focus on people." },
+        { h: "What gets automated" },
+        { ul: [
+          "Attendance from biometric devices or a mobile app",
+          "Leave requests and approvals with automatic balances",
+          "Salary calculation with deductions and overtime",
+          "Payslips emailed or shared on the employee app",
+          "Statutory reports for PF, ESI and TDS",
+        ] },
+        { h: "Employee self-service" },
+        { p: "Employees can apply for leave, download payslips and update details from their phone. Fewer emails and calls to HR, and a better experience for the team." },
+        { h: "Getting it right" },
+        { ul: [
+          "Clean up employee master data before going live",
+          "Run payroll in parallel for one month to verify results",
+          "Set clear approval rules for leave and attendance corrections",
+        ] },
+        { tip: "Integrate your HRMS with accounts, so salary entries post to your books automatically at the end of every payroll run." },
+      ],
+    },
+  ],
+};
