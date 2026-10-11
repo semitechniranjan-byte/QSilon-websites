@@ -606,3 +606,35 @@ body.loaded .split .grad.w { animation: wordIn .8s cubic-bezier(.2,.8,.2,1) forw
   .split .w { opacity: 1; transform: none; filter: none; }
   .loader, .cursor-dot, .cursor-ring { display: none; }
 }
+
+/* Featured (wide) cards — set `featured: true` on a service or solution */
+.grid > .featured { grid-column: 1 / -1; }
+.card.featured {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 1.6rem; align-items: start;
+  padding: 2.2rem; border-color: color-mix(in srgb, var(--c2) 45%, transparent);
+  background-color: color-mix(in srgb, var(--c2) 8%, transparent);
+}
+.card.featured::before { opacity: .7; }
+.card.featured > * { grid-column: 2; }
+.card.featured > .ic-wrap, .card.featured > .sol-top { grid-column: 1; grid-row: 1 / span 6; }
+.card.featured.sol > .sol-top { flex-direction: column; gap: .8rem; }
+.card.featured .ic-wrap { width: 72px; height: 72px; border-radius: 20px; background: var(--grad); color: #fff; margin: 0; }
+.card.featured .ic-wrap .ic { width: 34px; height: 34px; animation: voicePulse 1.6s ease-in-out infinite; }
+.card.featured h3 { font-size: 1.45rem; }
+.card.featured p { max-width: 780px; }
+.card.featured .chips { margin: .2rem 0 1rem; }
+@keyframes voicePulse { 50% { transform: scale(1.12); } }
+.new-badge {
+  display: inline-block; justify-self: start; width: max-content; margin-bottom: .6rem; padding: .2rem .65rem; border-radius: 999px;
+  font: 700 .7rem var(--font); letter-spacing: .08em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(90deg, var(--c3), var(--c2)); box-shadow: 0 6px 18px -6px rgba(236, 72, 153, .8);
+  animation: badgeGlow 2s ease-in-out infinite;
+}
+.tag .new-badge { margin: 0 .45rem 0 0; padding: .1rem .45rem; font-size: .62rem; vertical-align: 1px; }
+@keyframes badgeGlow { 50% { box-shadow: 0 6px 24px -2px rgba(236, 72, 153, .9); } }
+@media (max-width: 640px) {
+  .card.featured { display: block; padding: 1.6rem; }
+  .card.featured .ic-wrap { margin-bottom: 1rem; }
+  .card.featured.sol > .sol-top { flex-direction: row; }
+}
+@media (prefers-reduced-motion: reduce) { .card.featured .ic-wrap .ic, .new-badge { animation: none; } }

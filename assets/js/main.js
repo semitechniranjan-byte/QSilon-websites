@@ -10,6 +10,7 @@
 
   /* ---------------------------- Icon library ----------------------------- */
   const ICONS = {
+    voice: '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8"/><path d="M1.5 9v4M22.5 9v4"/>',
     bot: '<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M8 4h8"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/><path d="M2 13v3M22 13v3"/>',
     layers: '<path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
     code: '<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/><path d="m14 4-4 16"/>',
@@ -101,7 +102,8 @@
                 ${[62, 84, 48, 92, 70, 98, 76].map((v, i) => `<i style="--h:${v}%;--d:${i * 0.08}s"></i>`).join("")}
               </div>
               <div class="dash-rows">
-                <div>${icon("bot")}<span>AI agent resolved 128 tickets</span><b>Live</b></div>
+                <div>${icon("voice")}<span>AI voice agent: 340 calls answered</span><b>Live</b></div>
+                <div>${icon("bot")}<span>AI agent resolved 128 tickets</span><b>Done</b></div>
                 <div>${icon("layers")}<span>ERP: 42 invoices auto-generated</span><b>Done</b></div>
                 <div>${icon("school")}<span>Fee reminders sent to parents</span><b>Sent</b></div>
               </div>
@@ -146,10 +148,12 @@
             ${s.items
               .map(
                 (x, i) => `
-              <a class="card svc reveal" style="--i:${i}" href="services.html#${esc(x.id)}">
+              <a class="card svc reveal${x.featured ? " featured" : ""}" style="--i:${i}" href="services.html#${esc(x.id)}">
                 <div class="ic-wrap">${icon(x.icon)}</div>
+                ${x.badge ? `<span class="new-badge">${esc(x.badge)}</span>` : ""}
                 <h3>${esc(x.title)}</h3>
                 <p>${esc(x.text)}</p>
+                ${x.featured ? `<div class="chips">${x.features.map((f) => `<span>${esc(f)}</span>`).join("")}</div>` : ""}
                 <span class="more">Learn more ${icon("arrow")}</span>
               </a>`
               )
@@ -172,6 +176,7 @@
                 <span class="num">0${i + 1}</span>
               </div>
               <div class="detail-copy">
+                ${x.badge ? `<span class="new-badge">${esc(x.badge)}</span>` : ""}
                 <h2>${esc(x.title)}</h2>
                 <p class="lead">${esc(x.text)}</p>
                 <ul class="checks">${x.features.map((f) => `<li>${icon("tick")} ${esc(f)}</li>`).join("")}</ul>
@@ -194,11 +199,11 @@
             ${s.items
               .map(
                 (x, i) => `
-              <div class="card sol reveal" style="--i:${i}">
-                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${esc(x.tag)}</span></div>
+              <div class="card sol reveal${x.featured ? " featured" : ""}" style="--i:${i}">
+                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span></div>
                 <h3>${esc(x.title)}</h3>
                 <p>${esc(x.text)}</p>
-                <div class="chips">${x.modules.slice(0, 4).map((m) => `<span>${esc(m)}</span>`).join("")}</div>
+                <div class="chips">${x.modules.slice(0, x.featured ? 6 : 4).map((m) => `<span>${esc(m)}</span>`).join("")}</div>
               </div>`
               )
               .join("")}
@@ -217,8 +222,8 @@
             ${s.items
               .map(
                 (x, i) => `
-              <div class="card sol big reveal" style="--i:${i}">
-                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${esc(x.tag)}</span></div>
+              <div class="card sol big reveal${x.featured ? " featured" : ""}" style="--i:${i}">
+                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span></div>
                 <h3>${esc(x.title)}</h3>
                 <p>${esc(x.text)}</p>
                 <div class="chips">${x.modules.map((m) => `<span>${esc(m)}</span>`).join("")}</div>

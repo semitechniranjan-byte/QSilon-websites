@@ -14,7 +14,7 @@ window.SITE = {
     short: "QT",
     tagline: "B2B Software & AI Automation",
     description:
-      "QSilon Tensorv builds B2B software, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
+      "QSilon Tensorv builds B2B software, AI voice agents, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
   },
 
   // TODO: replace with your real contact details.
@@ -87,7 +87,7 @@ window.SITE = {
     secondary: { label: "Explore services", href: "services.html" },
     highlights: ["Custom-built for you", "Secure & scalable", "Dedicated support"],
     // Words that rotate in the hero card
-    rotating: ["ERP Systems", "AI Agents", "School ERP", "Websites", "CRM", "Automations"],
+    rotating: ["AI Voice Agents", "ERP Systems", "AI Agents", "School ERP", "Websites", "CRM", "Automations"],
   },
 
   techStrip: {
@@ -100,6 +100,15 @@ window.SITE = {
     title: "Everything your business needs to <span class='grad'>go digital</span>",
     text: "One partner for software, automation and web — from idea to launch and beyond.",
     items: [
+      {
+        id: "ai-voice",
+        icon: "voice",
+        featured: true, // shown as a wide highlighted card with a "New" badge
+        badge: "New",
+        title: "AI Voice Calling & Voice Agents",
+        text: "Human-like AI voice agents that make and answer phone calls 24/7 — qualifying leads, booking appointments, collecting payments and handling support in Hindi, English and regional languages.",
+        features: ["Inbound & outbound AI calling", "Lead qualification & follow-ups", "Appointment booking & reminders", "Hindi, English & regional languages", "CRM / WhatsApp integration", "Call recordings, transcripts & analytics"],
+      },
       {
         id: "ai-automation",
         icon: "bot",
@@ -165,6 +174,15 @@ window.SITE = {
     text: "Start faster with our proven platforms and tailor every module to your process.",
     items: [
       {
+        icon: "voice",
+        tag: "Voice AI",
+        featured: true,
+        badge: "New",
+        title: "AI Voice Calling Platform",
+        text: "Deploy AI voice agents on your business number. They call customers, answer enquiries, book appointments and update your CRM automatically — thousands of calls a day with a natural human voice.",
+        modules: ["Outbound Campaigns", "Inbound Call Bot", "Appointment Booking", "Payment Reminders", "Multilingual Voices", "Call Analytics"],
+      },
+      {
         icon: "layers",
         tag: "ERP",
         title: "Business ERP Suite",
@@ -212,8 +230,8 @@ window.SITE = {
   // Update with your real numbers. Plain text values (e.g. "24/7") are shown as-is;
   // numeric values animate as counters.
   stats: [
-    { value: 8, suffix: "+", label: "Service lines" },
-    { value: 6, suffix: "+", label: "Industry solutions" },
+    { value: 9, suffix: "+", label: "Service lines" },
+    { value: 7, suffix: "+", label: "Industry solutions" },
     { value: 100, suffix: "%", label: "Custom-built code" },
     { value: "24/7", label: "Support & monitoring" },
   ],
@@ -302,6 +320,7 @@ window.SITE = {
       { q: "How long does it take to build a project?", a: "A business website usually takes 1–3 weeks. ERP, school management and custom software projects typically take 4–12 weeks depending on modules and integrations. We share a clear timeline before starting." },
       { q: "Can you customise the ERP or school management system?", a: "Yes. Every module, form, report and workflow can be tailored to your process. We can also integrate with your existing tools, payment gateways, Tally, WhatsApp and more." },
       { q: "Do you provide support after launch?", a: "Absolutely. We offer training, maintenance plans, updates, hosting and priority support so your system keeps running smoothly." },
+      { q: "How does AI voice calling work?", a: "Our AI voice agent connects to your phone number and talks to customers in a natural voice. It can call leads, answer incoming calls, book appointments, send payment reminders and log every conversation in your CRM — in Hindi, English and regional languages, 24/7." },
       { q: "What can AI automation do for my business?", a: "AI can answer customer queries 24/7, qualify leads, read invoices and documents, generate reports, send follow-ups and automate repetitive tasks — saving your team hours every day." },
       { q: "How much does it cost?", a: "Pricing depends on scope. Share your requirements through the contact form and we will send a free consultation and a transparent quote." },
     ],
