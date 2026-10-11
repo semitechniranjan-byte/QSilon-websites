@@ -1,2 +1,45 @@
-# QSilon-websites
-d
+# QSilon Tensorv — Company Website
+
+Website for **QSilon Tensorv**: B2B software, AI automation, ERP, school management systems and websites.
+
+Pure HTML + CSS + JavaScript. No build step, no framework. It runs on any static host (GitHub Pages, Netlify, Vercel, cPanel).
+
+## Pages
+| Page | File |
+|------|------|
+| Home | `index.html` |
+| Services | `services.html` |
+| Solutions | `solutions.html` |
+| About | `about.html` |
+| Contact (form + details) | `contact.html` |
+
+## Editing the website (no coding needed)
+**All content lives in one file: `assets/js/site-data.js`.**
+
+- **Text, services, solutions, FAQ, stats**: edit the matching block.
+- **Contact details**: edit `contact` (email, phone, WhatsApp, address, hours, optional Google Maps embed).
+- **Page design and order**: `pages` lists the sections shown on each page, in order. Re-order, remove or add sections. For example:
+  ```js
+  home: ["hero", "techStrip", "services", "solutions", "stats", "process", "industries", "whyUs", "faq", "cta"],
+  ```
+  Available sections: `hero, pageHeader, techStrip, services, serviceDetails, solutions, solutionDetails, stats, process, industries, whyUs, techStack, about, values, testimonials, faq, cta, contact`.
+- **Add a service**: add an item to `services.items`. It automatically appears on the Home page, the Services page, the footer and the contact form dropdown.
+- **Testimonials**: add real client quotes to `testimonials`, then add `"testimonials"` to a page layout.
+- **Colours**: change `--c1`, `--c2`, `--c3` at the top of `assets/css/style.css`.
+
+## Contact form
+- By default, the form opens the visitor's email app with the message pre-filled, addressed to `contact.email`.
+- To receive submissions directly, create a free form on [Formspree](https://formspree.io), then set `contact.formEndpoint` to its URL (`https://formspree.io/f/xxxx`).
+- The form includes validation and a spam honeypot. Service links (for example "Discuss ERP Solutions") pre-select the service.
+
+## Run locally
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+## Deploy on GitHub Pages
+Repo **Settings → Pages → Deploy from branch → `main` / root**.
+
+## Before going live
+Replace the placeholder email, phone, WhatsApp number, address and social links in `site-data.js`, and update `stats` with your real numbers.
