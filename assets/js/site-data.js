@@ -19,9 +19,9 @@ window.SITE = {
     // Optional: path to your own logo image (e.g. "assets/img/qsilon-tensorv-logo-dark.svg").
     // Leave "" to use the built-in animated logo (mark + full company name).
     logo: "",
-    tagline: "B2B Software & AI Automation",
+    tagline: "Software & AI Solutions",
     description:
-      "QSilon Tensorv builds B2B software, AI voice agents, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
+      "QSilon Tensorv builds custom software, AI voice agents, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
   },
 
   // TODO: replace with your real contact details.
@@ -89,7 +89,7 @@ window.SITE = {
     badge: "AI-first software company",
     title: "Smart software & <span class='grad'>AI automation</span> for modern businesses",
     text:
-      "We build ERP systems, school management platforms, custom B2B software and stunning websites — powered by automation that saves your team hours every day.",
+      "We build ERP systems, school management platforms, custom software and stunning websites — powered by automation that saves your team hours every day.",
     primary: { label: "Get a free consultation", href: "contact.html" },
     secondary: { label: "Explore services", href: "services.html" },
     highlights: ["Custom-built for you", "Secure & scalable", "Dedicated support"],
@@ -131,9 +131,9 @@ window.SITE = {
         features: ["Inventory & warehouse", "Accounts, GST & billing", "HR, payroll & attendance", "Purchase & sales orders", "Role-based dashboards"],
       },
       {
-        id: "b2b-software",
+        id: "custom-software",
         icon: "code",
-        title: "Custom B2B Software",
+        title: "Custom Software Development",
         text: "Bespoke web and mobile applications, SaaS products, portals and integrations engineered for scale.",
         features: ["SaaS product development", "Customer & vendor portals", "API & third-party integrations", "Mobile apps (Android / iOS)", "Legacy system modernisation"],
       },
@@ -333,7 +333,7 @@ window.SITE = {
   about: {
     title: "Who we are",
     paragraphs: [
-      "QSilon Tensorv is a B2B software and AI automation company. We help businesses, schools and institutions replace manual work and scattered tools with smart, connected software.",
+      "QSilon Tensorv is a software and AI solutions company. We help businesses, schools and institutions replace manual work and scattered tools with smart, connected software.",
       "Our team combines deep engineering skills with practical business understanding — so every ERP, school management system, website or automation we build solves a real problem and pays for itself.",
     ],
     // About page: "Inside QSilon" section
@@ -398,6 +398,6 @@ window.SITE = {
   },
 
   footer: {
-    text: "B2B software, AI automation, ERP, school management systems and websites — built to help you grow.",
+    text: "Software and AI solutions — ERP, school management systems and websites — built to help you grow.",
   },
 };

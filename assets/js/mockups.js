@@ -85,7 +85,7 @@ window.QT_MOCKUPS = (function () {
       )}</div>`,
 
     /* ------------------------------ Custom software ------------------------- */
-    "b2b-software": () =>
+    "custom-software": () =>
       `<div class="mock">${win(
         "orders.service.js",
         `<div class="m-code">
