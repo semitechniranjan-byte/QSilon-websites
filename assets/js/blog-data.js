@@ -7,7 +7,9 @@
    - icon:    any icon name from assets/js/main.js
    - mockup:  animated screen shown at the top of the article (optional)
    - content: list of blocks — { h: "Heading" }, { p: "Paragraph" },
-              { ul: ["point", "point"] }, { tip: "Highlighted note" }
+              { ul: ["point", "point"] }, { tip: "Highlighted note" },
+              { img: "home-voice", caption: "Picture caption" }  (animated screen)
+   - cardMockup: screen used on the blog card (defaults to mockup)
    Newest posts are shown first automatically.
    ========================================================================== */
 window.BLOG = {
@@ -20,6 +22,8 @@ window.BLOG = {
       icon: "voice",
       mockup: "ai-voice",
       date: "2026-10-06",
+      cardMockup: "home-voice",
+      heroCaption: "A live AI voice call with real-time transcript.",
       excerpt:
         "Missed calls mean missed customers. Here is how AI voice agents answer, call back and follow up 24/7 — and how to know if your business is ready for one.",
       content: [
@@ -35,6 +39,7 @@ window.BLOG = {
         ] },
         { h: "Where it works best" },
         { p: "Voice agents shine wherever calls are frequent and follow a pattern: clinics confirming appointments, real-estate teams qualifying leads, schools reminding parents about fees, and service businesses booking visits. The agent handles the routine conversations, and transfers the call to a person when a customer needs one." },
+        { img: "home-voice", caption: "Example: an outbound campaign where the AI calls new leads and books site visits." },
         { h: "How to get started" },
         { ul: [
           "List the 3–5 call types your team handles most often",
@@ -53,6 +58,8 @@ window.BLOG = {
       icon: "layers",
       mockup: "erp",
       date: "2026-09-28",
+      cardMockup: "home-erp",
+      heroCaption: "An ERP dashboard with live revenue, orders and stock.",
       excerpt:
         "Spreadsheets are great — until stock, billing and reports live in ten different files. These signs tell you it is time for an ERP.",
       content: [
@@ -69,6 +76,7 @@ window.BLOG = {
         ] },
         { h: "What changes with an ERP" },
         { p: "With an ERP, every sale updates stock and accounts automatically. Low-stock items trigger purchase orders. Managers see live dashboards instead of waiting for reports. And because everyone works on the same system, there is one version of the truth." },
+        { img: "home-erp", caption: "Example: live warehouse stock with automatic purchase orders when items run low." },
         { h: "Choosing the right ERP" },
         { ul: [
           "Pick modules you need now, and add more later",
@@ -86,6 +94,8 @@ window.BLOG = {
       icon: "school",
       mockup: "school-management",
       date: "2026-09-19",
+      cardMockup: "home-school",
+      heroCaption: "A student's attendance, timetable and fee status in one place.",
       excerpt:
         "Admissions, fees, attendance, exams and parent communication — what a modern school management system should cover, and the questions to ask before you buy.",
       content: [
@@ -108,6 +118,7 @@ window.BLOG = {
           "Will the vendor train our teachers and office staff?",
           "Can we start with a few modules and add more later?",
         ] },
+        { img: "home-school", caption: "Example: the parent app — attendance, homework, fees, results and live bus tracking." },
         { h: "The biggest win: parent communication" },
         { p: "When parents get attendance alerts, homework, fee reminders and results on their phone, calls to the school office drop sharply and fee collection becomes faster. It also builds trust — parents feel connected to their child's progress." },
         { tip: "Plan the rollout around the school calendar. Starting at the beginning of a term makes data entry and training much easier." },
@@ -120,6 +131,8 @@ window.BLOG = {
       icon: "whatsapp",
       mockup: "ai-automation",
       date: "2026-09-10",
+      cardMockup: "home-automation",
+      heroCaption: "A lead flowing from website form to AI, WhatsApp and CRM automatically.",
       excerpt:
         "Your customers already live on WhatsApp. These five simple automations reply faster, collect payments and bring customers back — without extra staff.",
       content: [
@@ -128,6 +141,7 @@ window.BLOG = {
         { p: "Greet every new customer immediately, share your catalogue or price list and ask a couple of questions to understand what they need." },
         { h: "2. Orders and invoices" },
         { p: "Let customers place orders in chat. The system checks stock, creates the order and sends an invoice with a payment link automatically." },
+        { img: "home-automation", caption: "Example: a customer orders, gets an invoice and pays — all inside WhatsApp." },
         { h: "3. Payment reminders" },
         { p: "Send polite, scheduled reminders for pending payments, with a one-tap UPI link. Collection improves without awkward follow-up calls." },
         { h: "4. Appointment booking and reminders" },
@@ -144,6 +158,8 @@ window.BLOG = {
       icon: "globe",
       mockup: "websites",
       date: "2026-08-30",
+      cardMockup: "home-website",
+      heroCaption: "A modern, mobile-friendly business website.",
       excerpt:
         "A beautiful website is not enough — it has to load fast, rank on Google and turn visitors into enquiries. Here are the 8 things that matter most.",
       content: [
@@ -159,6 +175,7 @@ window.BLOG = {
           "SEO basics: page titles, descriptions and local business listing",
           "Analytics so you know where enquiries come from",
         ] },
+        { img: "home-website", caption: "Example: an online store where visitors add to cart and order in a few taps." },
         { h: "Mobile first" },
         { p: "Most visitors arrive on a phone. Design for small screens first: large buttons, short paragraphs and forms that are easy to fill with a thumb." },
         { h: "Keep improving" },
@@ -173,6 +190,8 @@ window.BLOG = {
       icon: "users",
       mockup: "hrms",
       date: "2026-08-21",
+      cardMockup: "hrms",
+      heroCaption: "Attendance, payroll run and leave approvals in an HRMS.",
       excerpt:
         "Attendance sheets, leave requests and salary calculations eat up days every month. Here is how an HRMS automates them — accurately.",
       content: [
@@ -187,6 +206,7 @@ window.BLOG = {
         ] },
         { h: "Employee self-service" },
         { p: "Employees can apply for leave, download payslips and update details from their phone. Fewer emails and calls to HR, and a better experience for the team." },
+        { img: "about-team", caption: "With HR work automated, your team can focus on people and projects." },
         { h: "Getting it right" },
         { ul: [
           "Clean up employee master data before going live",

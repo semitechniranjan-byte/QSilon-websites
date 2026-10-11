@@ -1447,3 +1447,28 @@ main { overflow-x: clip; }
   .post-body { font-size: 1rem; }
   .post-cta { padding: 1.4rem; }
 }
+
+/* Blog card images: live miniature of the product screen */
+.post-cover.has-shot { aspect-ratio: 16 / 10; place-items: stretch; }
+.pc-shot {
+  position: absolute; left: 5%; top: 7%; width: 180%; height: 172%;
+  transform: scale(.5); transform-origin: 0 0; transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.pc-shot .mock { inset: 0; font-size: .74rem; }
+.post-card:hover .pc-shot, .blog-featured:hover .pc-shot { transform: scale(.52) translate(-1%, -2%); }
+.post-cover.has-shot::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(transparent, rgba(0, 0, 0, .25)); pointer-events: none; }
+.pc-badge {
+  position: absolute; z-index: 2; right: .7rem; bottom: .7rem; width: 2.4rem; height: 2.4rem; border-radius: 12px;
+  display: grid; place-items: center; color: #fff; background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .4);
+  backdrop-filter: blur(8px); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .5); transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.pc-badge .ic { width: 1.2rem; height: 1.2rem; }
+.post-card:hover .pc-badge { transform: rotate(-10deg) scale(1.1); }
+
+/* Article figures */
+.post-fig { margin: 2.2rem 0; }
+.post-fig .detail-art { width: 100%; }
+.post-fig figcaption { margin-top: .8rem; text-align: center; color: var(--muted); font-size: .92rem; font-style: italic; }
+.post-hero { margin-top: 0; }
+@media (max-width: 640px) { .pc-shot .mock { font-size: .7rem; } }

@@ -116,7 +116,17 @@
     return Math.max(2, Math.round(words / 200));
   };
   const postMeta = (p) => `<span>${icon("clock")} ${fmtDate(p.date)}</span><span>${icon("eye")} ${readTime(p)} min read</span>`;
-  const cover = (p) => `<div class="post-cover" data-cat="${esc(p.category)}"><span class="pc-orb"></span><span class="pc-orb b"></span><div class="pc-ic">${icon(p.icon)}</div></div>`;
+  // Card image: a live miniature of the article's product screen (falls back to an icon cover)
+  const cover = (p) => {
+    const key = p.cardMockup || p.mockup;
+    if (key && MOCKUPS[key])
+      return `<div class="post-cover has-shot" data-cat="${esc(p.category)}"><span class="pc-orb"></span><div class="pc-shot">${MOCKUPS[key](icon)}</div><span class="pc-badge">${icon(p.icon)}</span></div>`;
+    return `<div class="post-cover" data-cat="${esc(p.category)}"><span class="pc-orb"></span><span class="pc-orb b"></span><div class="pc-ic">${icon(p.icon)}</div></div>`;
+  };
+  const figure = (key, caption) =>
+    MOCKUPS[key]
+      ? `<figure class="post-fig"><div class="detail-art glass">${MOCKUPS[key](icon)}</div>${caption ? `<figcaption>${esc(caption)}</figcaption>` : ""}</figure>`
+      : "";
   const postCard = (p, i) => `
     <a class="card post-card reveal" style="--i:${i}" href="blog.html?post=${esc(p.slug)}" data-cat="${esc(p.category)}" data-text="${esc((p.title + " " + p.excerpt + " " + p.category).toLowerCase())}">
       ${cover(p)}
@@ -132,6 +142,7 @@
         b.h ? `<h2>${esc(b.h)}</h2>`
         : b.ul ? `<ul>${b.ul.map((li) => `<li>${icon("tick")}<span>${esc(li)}</span></li>`).join("")}</ul>`
         : b.tip ? `<aside class="post-tip">${icon("spark")}<p>${esc(b.tip)}</p></aside>`
+        : b.img ? figure(b.img, b.caption)
         : `<p>${esc(b.p)}</p>`)
       .join("");
     const related = [...posts.filter((x) => x.slug !== p.slug && x.category === p.category), ...posts.filter((x) => x.slug !== p.slug && x.category !== p.category)].slice(0, 3);
@@ -143,7 +154,10 @@
             <span class="tag">${esc(p.category)}</span>
             <h1>${esc(p.title)}</h1>
             <div class="post-meta big"><span>${icon("users")} ${esc(BLOG.author || S.brand.name)}</span>${postMeta(p)}</div>
-            <div class="detail-art glass post-hero">${p.mockup && MOCKUPS[p.mockup] ? MOCKUPS[p.mockup](icon) : cover(p)}</div>
+            <figure class="post-fig post-hero">
+              <div class="detail-art glass">${p.mockup && MOCKUPS[p.mockup] ? MOCKUPS[p.mockup](icon) : cover(p)}</div>
+              ${p.heroCaption ? `<figcaption>${esc(p.heroCaption)}</figcaption>` : ""}
+            </figure>
             <div class="post-body">${body}</div>
             <div class="post-share">
               <span>Share this article</span>
