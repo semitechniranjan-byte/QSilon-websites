@@ -51,10 +51,10 @@ window.SITE = {
 
   /* ---------- Page layouts: list section names in display order ---------- */
   pages: {
-    home: ["hero", "techStrip", "services", "solutions", "stats", "process", "industries", "whyUs", "faq", "cta"],
+    home: ["hero", "techStrip", "services", "showcase", "solutions", "stats", "process", "industries", "whyUs", "faq", "cta"],
     services: ["pageHeader", "serviceDetails", "process", "techStack", "cta"],
     solutions: ["pageHeader", "solutionDetails", "industries", "faq", "cta"],
-    about: ["pageHeader", "about", "values", "stats", "whyUs", "cta"],
+    about: ["pageHeader", "about", "missionVision", "values", "stats", "whyUs", "cta"],
     contact: ["pageHeader", "contact", "faq"],
   },
 
@@ -180,6 +180,7 @@ window.SITE = {
       {
         icon: "voice",
         tag: "Voice AI",
+        mockup: "ai-voice", // animated screen from assets/js/mockups.js
         featured: true,
         badge: "New",
         title: "AI Voice Calling Platform",
@@ -189,6 +190,7 @@ window.SITE = {
       {
         icon: "layers",
         tag: "ERP",
+        mockup: "erp", // animated screen from assets/js/mockups.js
         title: "Business ERP Suite",
         text: "Manufacturing, trading and service businesses run inventory, finance, HR and sales from a single dashboard.",
         modules: ["Inventory", "Accounts & GST", "HR & Payroll", "Sales & CRM", "Purchase", "Reports"],
@@ -196,6 +198,7 @@ window.SITE = {
       {
         icon: "school",
         tag: "Education",
+        mockup: "school-management", // animated screen from assets/js/mockups.js
         title: "School & College Management",
         text: "Digitise your entire institution with web and mobile apps for admins, teachers, students and parents.",
         modules: ["Admissions", "Fees", "Attendance", "Exams", "Transport", "Library", "Parent App"],
@@ -203,6 +206,7 @@ window.SITE = {
       {
         icon: "bot",
         tag: "AI",
+        mockup: "ai-automation", // animated screen from assets/js/mockups.js
         title: "AI Automation Platform",
         text: "Deploy AI agents that answer customers, qualify leads, process documents and trigger workflows 24/7.",
         modules: ["Chatbots", "Voice Agents", "Doc AI", "Lead Scoring", "WhatsApp Bots"],
@@ -210,6 +214,7 @@ window.SITE = {
       {
         icon: "cart",
         tag: "Commerce",
+        mockup: "websites", // animated screen from assets/js/mockups.js
         title: "E-commerce & Web Platforms",
         text: "High-converting online stores and business websites with payments, inventory sync and analytics.",
         modules: ["Storefront", "Payments", "Inventory Sync", "SEO", "Analytics"],
@@ -217,6 +222,7 @@ window.SITE = {
       {
         icon: "hospital",
         tag: "Healthcare",
+        mockup: "hospital", // animated screen from assets/js/mockups.js
         title: "Hospital & Clinic Management",
         text: "Appointments, patient records, billing, pharmacy and lab management in one secure system.",
         modules: ["OPD / IPD", "EMR", "Billing", "Pharmacy", "Lab"],
@@ -224,11 +230,20 @@ window.SITE = {
       {
         icon: "users",
         tag: "HR",
+        mockup: "hrms", // animated screen from assets/js/mockups.js
         title: "HRMS & Payroll",
         text: "Attendance, leave, payroll, performance and employee self-service — all automated.",
         modules: ["Attendance", "Leave", "Payroll", "Appraisals", "Self-service"],
       },
     ],
+  },
+
+  // Home page "See it in action" tabs — list service ids (each shows its animated screen).
+  showcase: {
+    eyebrow: "Live demo",
+    title: "See our products <span class='grad'>in action</span>",
+    text: "A quick look at what we build. Click a tab or let it play.",
+    items: ["ai-voice", "ai-automation", "erp", "school-management", "crm-analytics", "websites"],
   },
 
   // Update with your real numbers. Plain text values (e.g. "24/7") are shown as-is;

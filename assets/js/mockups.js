@@ -191,5 +191,64 @@ window.QT_MOCKUPS = (function () {
         </div>
         <div class="m-swatches"><span style="--c:#22d3ee"></span><span style="--c:#8b5cf6"></span><span style="--c:#ec4899"></span><span style="--c:#0e1430"></span><span style="--c:#f6f7fc"></span><em>Aa  Space Grotesk</em></div>
       </div>`,
+
+    /* ------------------------------ Hospital / clinic ----------------------- */
+    hospital: (icon) =>
+      `<div class="mock">${win(
+        "Hospital · OPD queue",
+        `<div class="m-hosp">
+          <div class="m-queue">
+            <div class="m-t-head">${icon("users")} Today's tokens</div>
+            ${[
+              ["21", "Rahul S.", "Dr. Mehta", "done", "Done"],
+              ["22", "Priya M.", "Dr. Mehta", "live", "In consultation"],
+              ["23", "Imran K.", "Dr. Rao", "", "Waiting"],
+              ["24", "Neha G.", "Dr. Rao", "", "Waiting"],
+            ]
+              .map(([t, n, d, c, st]) => `<div class="m-tok ${c}"><b>${t}</b><span><strong>${n}</strong><small>${d}</small></span><em>${st}</em></div>`)
+              .join("")}
+          </div>
+          <div class="m-side">
+            <div class="m-tile"><small>Beds available</small><strong>12 / 40</strong><div class="m-mini"><div><i style="--w:30%"></i></div></div></div>
+            <div class="m-tile"><small>Pharmacy bill</small><strong>₹1,240</strong><b class="ok">Paid</b></div>
+            <div class="m-tile m-pop">${icon("check")}<span>Lab report ready · SMS sent</span></div>
+          </div>
+        </div>`
+      )}</div>`,
+
+    /* ------------------------------- HRMS & payroll ------------------------- */
+    hrms: (icon) =>
+      `<div class="mock">${win(
+        "HRMS · Payroll",
+        `<div class="m-hr">
+          <div class="m-att">
+            <div class="m-t-head">${icon("clock")} Attendance · this month</div>
+            <div class="m-heat">${Array.from({ length: 35 }, (_, i) => `<i class="${[5, 6, 12, 13, 19, 20, 26, 27].includes(i) ? "off" : i === 9 || i === 23 ? "leave" : ""}" style="--d:${(i * 0.03).toFixed(2)}s"></i>`).join("")}</div>
+            <div class="m-legend"><span><i></i>Present</span><span><i class="leave"></i>Leave</span><span><i class="off"></i>Weekend</span></div>
+          </div>
+          <div class="m-pay">
+            <div class="m-t-head">${icon("bank")} Payroll run</div>
+            <div class="m-mini"><div><i class="m-run"></i></div></div>
+            <small class="m-run-txt"><span>Processing 52 employees…</span><span>${icon("tick")} Salaries credited</span></small>
+            <div class="m-leave"><span class="m-initials">RS</span><div><strong>Riya S. · Leave</strong><small>12–14 Oct · Sick</small></div><b class="ok">Approve</b></div>
+          </div>
+        </div>`
+      )}</div>`,
+
+    /* ------------------------------ About / company ------------------------- */
+    about: (icon, S) => {
+      const ics = ["voice", "bot", "layers", "school", "globe", "chart", "cloud", "code"];
+      return `
+      <div class="mock m-about">
+        <div class="m-orbit">
+          <div class="m-core">${(S && S.brand.short) || "QT"}</div>
+          <div class="m-orb-ring r1">${ics.map((ic, i) => `<span style="--a:${i * 45}deg">${icon(ic)}</span>`).join("")}</div>
+          <div class="m-orb-ring r2"></div>
+        </div>
+        <div class="m-float a">${icon("spark")} AI-first</div>
+        <div class="m-float b">${icon("shield")} Secure</div>
+        <div class="m-float c">${icon("headset")} Support</div>
+      </div>`;
+    },
   };
 })();

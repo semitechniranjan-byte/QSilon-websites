@@ -76,11 +76,13 @@
     b ? `<a class="btn btn-${kind}" href="${esc(b.href)}">${esc(b.label)} ${kind === "primary" ? icon("arrow") : ""}</a>` : "";
 
   const page = document.body.dataset.page || "home";
+  const slug = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
   // Service visual: your own photo (image), else an animated product screen, else the icon
   const MOCKUPS = window.QT_MOCKUPS || {};
   const detailVisual = (x) => {
-    const fallback = MOCKUPS[x.id] ? MOCKUPS[x.id](icon) : `<div class="big-ic">${icon(x.icon)}</div>`;
+    const key = x.mockup || x.id;
+    const fallback = MOCKUPS[key] ? MOCKUPS[key](icon) : `<div class="big-ic">${icon(x.icon)}</div>`;
     if (!x.image) return fallback;
     return `<img class="detail-img" src="${esc(x.image)}" alt="${esc(x.imageAlt || x.title)}" loading="lazy"
       onerror="this.parentElement.classList.remove('has-img');this.outerHTML=this.nextElementSibling.innerHTML"/><template>${fallback}</template>`;
@@ -223,23 +225,65 @@
     },
 
     solutionDetails() {
-      const s = S.solutions;
       return `
       <section class="section">
+        <div class="container stack">
+          ${S.solutions.items
+            .map(
+              (x, i) => `
+            <article class="detail reveal ${i % 2 ? "flip" : ""}" id="${slug(x.title)}">
+              <div class="detail-art glass${x.image ? " has-img" : ""}">
+                ${detailVisual(x)}
+                <span class="num">0${i + 1}</span>
+              </div>
+              <div class="detail-copy">
+                <span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span>
+                <h2>${esc(x.title)}</h2>
+                <p class="lead">${esc(x.text)}</p>
+                <ul class="checks">${x.modules.map((m) => `<li>${icon("tick")} ${esc(m)}</li>`).join("")}</ul>
+                <div class="btn-row">
+                  <a class="btn btn-primary" href="contact.html?service=${encodeURIComponent(x.title)}">Request a demo ${icon("arrow")}</a>
+                </div>
+              </div>
+            </article>`
+            )
+            .join("")}
+        </div>
+      </section>`;
+    },
+
+    showcase() {
+      const c = S.showcase;
+      const items = c.items.map((id) => S.services.items.find((x) => x.id === id)).filter(Boolean);
+      if (!items.length) return "";
+      return `
+      <section class="section alt">
         <div class="container">
-          <div class="grid g2">
-            ${s.items
-              .map(
-                (x, i) => `
-              <div class="card sol big reveal${x.featured ? " featured" : ""}" style="--i:${i}">
-                <div class="sol-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="tag">${x.badge ? `<b class="new-badge">${esc(x.badge)}</b>` : ""}${esc(x.tag)}</span></div>
-                <h3>${esc(x.title)}</h3>
-                <p>${esc(x.text)}</p>
-                <div class="chips">${x.modules.map((m) => `<span>${esc(m)}</span>`).join("")}</div>
-                <a class="more" href="contact.html?service=${encodeURIComponent(x.title)}">Request a demo ${icon("arrow")}</a>
-              </div>`
-              )
-              .join("")}
+          ${head(c)}
+          <div class="showcase reveal" data-showcase>
+            <div class="sc-tabs" role="tablist" aria-label="Product demos">
+              ${items
+                .map(
+                  (x, i) => `
+                <button class="sc-tab${i ? "" : " on"}" role="tab" aria-selected="${i ? "false" : "true"}" data-i="${i}">
+                  <span class="ic-wrap sm">${icon(x.icon)}</span>
+                  <span class="sc-txt"><strong>${esc(x.title)}</strong><small>${esc(x.text)}</small></span>
+                  <i class="sc-prog"></i>
+                </button>`
+                )
+                .join("")}
+            </div>
+            <div class="sc-stage">
+              ${items
+                .map(
+                  (x, i) => `
+                <div class="detail-art glass sc-panel${i ? "" : " on"}" role="tabpanel" data-i="${i}">
+                  <template>${detailVisual(x)}</template>
+                </div>`
+                )
+                .join("")}
+              <a class="more sc-link" href="services.html">Explore all services ${icon("arrow")}</a>
+            </div>
           </div>
         </div>
       </section>`;
@@ -356,10 +400,20 @@
             <h2>${esc(a.title)}</h2>
             ${a.paragraphs.map((p) => `<p class="lead">${esc(p)}</p>`).join("")}
           </div>
-          <div class="mv">
-            <div class="card reveal"><div class="ic-wrap">${icon("rocket")}</div><h3>Our mission</h3><p>${esc(a.mission)}</p></div>
-            <div class="card reveal"><div class="ic-wrap">${icon("eye")}</div><h3>Our vision</h3><p>${esc(a.vision)}</p></div>
+          <div class="reveal about-art">
+            <div class="detail-art glass">${MOCKUPS.about ? MOCKUPS.about(icon, S) : ""}</div>
           </div>
+        </div>
+      </section>`;
+    },
+
+    missionVision() {
+      const a = S.about;
+      return `
+      <section class="section tight">
+        <div class="container grid g2">
+          <div class="card mv-card reveal"><div class="ic-wrap">${icon("rocket")}</div><h3>Our mission</h3><p>${esc(a.mission)}</p></div>
+          <div class="card mv-card reveal" style="--i:1"><div class="ic-wrap">${icon("eye")}</div><h3>Our vision</h3><p>${esc(a.vision)}</p></div>
         </div>
       </section>`;
     },
@@ -758,12 +812,56 @@
   }
 
   // Live call timers in the voice mockup
-  $$("[data-timer]").forEach((el) => {
-    let sec = 0;
-    setInterval(() => {
-      sec = (sec + 1) % 600;
+  setInterval(() => {
+    $$("[data-timer]").forEach((el) => {
+      const sec = (el._sec = ((el._sec || 0) + 1) % 600);
       el.textContent = `${String(Math.floor(sec / 60)).padStart(2, "0")}:${String(sec % 60).padStart(2, "0")}`;
-    }, 1000);
+    });
+  }, 1000);
+
+  // Showcase tabs (home): auto-plays, pauses on hover, restarts animations on switch
+  $$("[data-showcase]").forEach((sc) => {
+    const tabs = $$(".sc-tab", sc);
+    const panels = $$(".sc-panel", sc);
+    const DURATION = 7000;
+    let cur = -1, timer, paused = false;
+    const show = (i) => {
+      if (i === cur) return;
+      cur = i;
+      tabs.forEach((t, n) => {
+        t.classList.toggle("on", n === i);
+        t.setAttribute("aria-selected", String(n === i));
+      });
+      panels.forEach((p, n) => {
+        p.classList.toggle("on", n === i);
+        if (n === i) {
+          const tpl = p.querySelector("template");
+          // re-insert the screen so its animations start from the beginning
+          $$(".mock, .big-ic, .detail-img", p).forEach((el) => el.remove());
+          p.insertAdjacentHTML("afterbegin", tpl.innerHTML);
+        }
+      });
+      sc.style.setProperty("--dur", DURATION + "ms");
+      sc.classList.remove("playing");
+      void sc.offsetWidth;
+      if (!paused && !reduce) sc.classList.add("playing");
+    };
+    const next = () => show((cur + 1) % tabs.length);
+    const start = () => {
+      clearInterval(timer);
+      if (!reduce) timer = setInterval(() => !paused && next(), DURATION);
+    };
+    tabs.forEach((t, n) => t.addEventListener("click", () => { show(n); start(); }));
+    sc.addEventListener("pointerenter", () => { paused = true; sc.classList.add("paused"); });
+    sc.addEventListener("pointerleave", () => {
+      paused = false;
+      sc.classList.remove("paused", "playing");
+      void sc.offsetWidth;
+      if (!reduce) sc.classList.add("playing");
+      start();
+    });
+    show(0);
+    start();
   });
 
   // Scroll to hash after dynamic render
