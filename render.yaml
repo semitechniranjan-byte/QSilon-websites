@@ -5,7 +5,8 @@ services:
     name: qsilon-tensorv
     runtime: static
     branch: main
-    buildCommand: echo "Static site - no build needed"
+    # Stamp CSS/JS links with the commit id so browsers always load the latest files
+    buildCommand: sed -i "s/?v=[A-Za-z0-9]*/?v=${RENDER_GIT_COMMIT:-$(date +%s)}/g" *.html
     staticPublishPath: .
     pullRequestPreviewsEnabled: false
     # Clean URLs: /services also opens services.html
@@ -32,6 +33,6 @@ services:
       - path: /*
         name: Referrer-Policy
         value: strict-origin-when-cross-origin
-      - path: /assets/*
+      - path: /*
         name: Cache-Control
-        value: public, max-age=86400
+        value: no-cache
