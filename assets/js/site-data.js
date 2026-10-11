@@ -16,6 +16,9 @@ window.SITE = {
   brand: {
     name: "QSilon Tensorv",
     short: "QT",
+    // Optional: path to your own logo image (e.g. "assets/img/qsilon-tensorv-logo-dark.svg").
+    // Leave "" to use the built-in animated logo (mark + full company name).
+    logo: "",
     tagline: "B2B Software & AI Automation",
     description:
       "QSilon Tensorv builds B2B software, AI voice agents, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
@@ -54,8 +57,8 @@ window.SITE = {
     home: ["hero", "techStrip", "services", "showcase", "solutions", "stats", "process", "industries", "whyUs", "faq", "cta"],
     services: ["pageHeader", "serviceDetails", "process", "techStack", "cta"],
     solutions: ["pageHeader", "solutionDetails", "industries", "faq", "cta"],
-    about: ["pageHeader", "about", "missionVision", "values", "stats", "whyUs", "cta"],
-    contact: ["pageHeader", "contact", "faq"],
+    about: ["pageHeader", "about", "missionVision", "teamWork", "expertise", "values", "stats", "whyUs", "cta"],
+    contact: ["pageHeader", "contact", "nextSteps", "faq"],
   },
 
   /* ---------- Per-page headers (used by the "pageHeader" section) ---------- */
@@ -243,7 +246,27 @@ window.SITE = {
     eyebrow: "Live demo",
     title: "See our products <span class='grad'>in action</span>",
     text: "A quick look at what we build. Click a tab or let it play.",
-    items: ["ai-voice", "ai-automation", "erp", "school-management", "crm-analytics", "websites"],
+    // Each tab: a service id, an example scene (assets/js/mockups-extra.js) and an example caption.
+    items: [
+      { id: "ai-voice", mockup: "home-voice", example: "Example: a real-estate firm's AI agent calls new leads and books site visits automatically." },
+      { id: "ai-automation", mockup: "home-automation", example: "Example: a grocery store takes orders, invoices and payments on WhatsApp — no staff needed." },
+      { id: "erp", mockup: "home-erp", example: "Example: a distributor's ERP tracks stock live and raises purchase orders when items run low." },
+      { id: "school-management", mockup: "home-school", example: "Example: parents get attendance, homework, fees, results and live bus tracking in one app." },
+      { id: "crm-analytics", mockup: "home-crm", example: "Example: a sales head tracks revenue, targets and region-wise performance in real time." },
+      { id: "websites", mockup: "home-website", example: "Example: an online store where customers browse, add to cart and order on any device." },
+    ],
+  },
+
+  // Contact page "What happens next" section
+  nextSteps: {
+    eyebrow: "What happens next",
+    title: "From message to <span class='grad'>kick-off</span> in 4 steps",
+    steps: [
+      { icon: "mail", title: "We receive your enquiry", text: "You get an instant confirmation and our team reviews your requirements." },
+      { icon: "users", title: "An expert is assigned", text: "A solutions expert for your industry becomes your single point of contact." },
+      { icon: "phone", title: "Free consultation call", text: "We understand your goals, suggest the right solution and answer every question." },
+      { icon: "layers", title: "Proposal & quote", text: "You receive a clear scope, timeline and transparent pricing — no surprises." },
+    ],
   },
 
   // Update with your real numbers. Plain text values (e.g. "24/7") are shown as-is;
@@ -312,6 +335,21 @@ window.SITE = {
     paragraphs: [
       "QSilon Tensorv is a B2B software and AI automation company. We help businesses, schools and institutions replace manual work and scattered tools with smart, connected software.",
       "Our team combines deep engineering skills with practical business understanding — so every ERP, school management system, website or automation we build solves a real problem and pays for itself.",
+    ],
+    // About page: "Inside QSilon" section
+    inside: {
+      eyebrow: "Inside QSilon Tensorv",
+      title: "One team, <span class='grad'>every skill you need</span>",
+      text: "Every project gets a dedicated cross-functional team. We meet daily, ship in weekly sprints and keep you updated at every step.",
+      points: ["Dedicated project manager", "Weekly demos & progress reports", "Agile sprints with clear milestones", "Code reviews & automated testing"],
+    },
+    team: [
+      { icon: "bot", title: "AI & ML Engineers", text: "Voice agents, chatbots, LLM apps and predictive models.", skills: ["LLMs", "Voice AI", "Python", "LangChain"] },
+      { icon: "code", title: "Full-stack Developers", text: "Scalable web apps, ERPs, portals and APIs.", skills: ["React", "Node.js", "Django", "PostgreSQL"] },
+      { icon: "phone", title: "Mobile Developers", text: "Android and iOS apps for teams, parents and customers.", skills: ["Flutter", "React Native", "Firebase"] },
+      { icon: "pen", title: "UI / UX Designers", text: "Clean, simple interfaces your users enjoy.", skills: ["Figma", "Design systems", "Prototyping"] },
+      { icon: "cloud", title: "Cloud & DevOps", text: "Secure hosting, CI/CD, backups and monitoring.", skills: ["AWS", "Docker", "CI/CD"] },
+      { icon: "headset", title: "QA & Support", text: "Testing, training and quick help after launch.", skills: ["Testing", "Training", "24/7 monitoring"] },
     ],
     mission: "To make powerful, intelligent software accessible and affordable for every growing organisation.",
     vision: "To be the most trusted technology partner for businesses and institutions going digital.",

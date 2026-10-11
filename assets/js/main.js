@@ -76,6 +76,25 @@
     b ? `<a class="btn btn-${kind}" href="${esc(b.href)}">${esc(b.label)} ${kind === "primary" ? icon("arrow") : ""}</a>` : "";
 
   const page = document.body.dataset.page || "home";
+
+  /* ------------------------------- Logo mark ------------------------------ */
+  // "Q" ring with a neural-network core and a forward tail, on a gradient tile.
+  let logoUid = 0;
+  const logoMark = (cls = "") => {
+    const id = "qtg" + logoUid++;
+    return `<svg class="qt-mark ${cls}" viewBox="0 0 64 64" role="img" aria-label="${esc(S.brand.name)} logo">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+      <rect width="64" height="64" rx="16" fill="url(#${id})"/>
+      <circle cx="30" cy="30" r="15" fill="none" stroke="#fff" stroke-width="6"/>
+      <path d="M34 35 47 48" stroke="#fff" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M23 31 30 22 37 28Z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" opacity=".7"/>
+      <circle cx="23" cy="31" r="2.8" fill="#fff"/><circle cx="30" cy="22" r="2.8" fill="#fff"/><circle cx="37" cy="28" r="2.8" fill="#fff"/>
+      <path d="M51 8.5 52.6 12.4 56.5 14 52.6 15.6 51 19.5 49.4 15.6 45.5 14 49.4 12.4Z" fill="#fff"/>
+    </svg>`;
+  };
+  window.QT_LOGO_MARK = logoMark;
+  const brandWords = S.brand.name.split(" ");
+  const wordmark = `${esc(brandWords[0])}${brandWords.length > 1 ? ` <span class="grad">${esc(brandWords.slice(1).join(" "))}</span>` : ""}`;
   const slug = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
   // Service visual: your own photo (image), else an animated product screen, else the icon
@@ -254,7 +273,14 @@
 
     showcase() {
       const c = S.showcase;
-      const items = c.items.map((id) => S.services.items.find((x) => x.id === id)).filter(Boolean);
+      // items can be service ids or { id, mockup, example } objects
+      const items = c.items
+        .map((it) => {
+          const o = typeof it === "string" ? { id: it } : it;
+          const svc = S.services.items.find((x) => x.id === o.id);
+          return svc && { ...svc, image: o.image, mockup: o.mockup || svc.mockup, text: o.example || svc.text };
+        })
+        .filter(Boolean);
       if (!items.length) return "";
       return `
       <section class="section alt">
@@ -418,6 +444,69 @@
       </section>`;
     },
 
+    nextSteps() {
+      const n = S.nextSteps;
+      return `
+      <section class="section alt">
+        <div class="container">
+          ${head(n)}
+          <div class="ns-grid">
+            <div class="reveal ns-art"><div class="detail-art glass">${MOCKUPS["contact-flow"] ? MOCKUPS["contact-flow"](icon) : ""}</div></div>
+            <ol class="ns-steps reveal">
+              ${n.steps
+                .map(
+                  (x, i) => `
+                <li style="--t:${1.4 + i * 1.4}s">
+                  <span class="ns-n">${i + 1}</span>
+                  <div class="ic-wrap sm">${icon(x.icon)}</div>
+                  <div><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></div>
+                </li>`
+                )
+                .join("")}
+            </ol>
+          </div>
+        </div>
+      </section>`;
+    },
+
+    teamWork() {
+      const t = S.about.inside;
+      return `
+      <section class="section alt">
+        <div class="container about-grid">
+          <div class="reveal about-art wide"><div class="detail-art glass">${MOCKUPS["about-team"] ? MOCKUPS["about-team"](icon) : ""}</div></div>
+          <div class="reveal">
+            <span class="eyebrow">${esc(t.eyebrow)}</span>
+            <h2>${t.title}</h2>
+            <p class="lead">${esc(t.text)}</p>
+            <ul class="checks one">${t.points.map((p) => `<li>${icon("tick")} ${esc(p)}</li>`).join("")}</ul>
+          </div>
+        </div>
+      </section>`;
+    },
+
+    expertise() {
+      return `
+      <section class="section">
+        <div class="container">
+          ${head({ eyebrow: "Our expertise", title: "The people behind <span class='grad'>your product</span>", text: "Specialists across AI, software, design and cloud — working together on your project." })}
+          <div class="grid g3">
+            ${S.about.team
+              .map(
+                (x, i) => `
+              <div class="card team-card reveal" style="--i:${i}">
+                <div class="team-top"><div class="ic-wrap">${icon(x.icon)}</div><span class="team-pulse"></span></div>
+                <h3>${esc(x.title)}</h3>
+                <p>${esc(x.text)}</p>
+                <div class="chips">${x.skills.map((m) => `<span>${esc(m)}</span>`).join("")}</div>
+              </div>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>`;
+    },
+
     values() {
       const s = S.values;
       return `
@@ -558,8 +647,8 @@
   /* --------------------------- Header & footer --------------------------- */
   const logo = () => `
     <a class="logo" href="index.html" aria-label="${esc(S.brand.name)} home">
-      <span class="logo-mark">${esc(S.brand.short)}</span>
-      <span class="logo-text">${esc(S.brand.name)}<small>${esc(S.brand.tagline)}</small></span>
+      ${S.brand.logo ? `<img class="logo-img" src="${esc(S.brand.logo)}" alt="${esc(S.brand.name)}"/>` : `<span class="logo-mark">${logoMark()}</span>
+      <span class="logo-text"><span class="logo-name">${wordmark}</span><small>${esc(S.brand.tagline)}</small></span>`}
     </a>`;
 
   function renderHeader() {

@@ -241,7 +241,7 @@ window.QT_MOCKUPS = (function () {
       return `
       <div class="mock m-about">
         <div class="m-orbit">
-          <div class="m-core">${(S && S.brand.short) || "QT"}</div>
+          <div class="m-core">${window.QT_LOGO_MARK ? window.QT_LOGO_MARK() : (S && S.brand.short) || "QT"}</div>
           <div class="m-orb-ring r1">${ics.map((ic, i) => `<span style="--a:${i * 45}deg">${icon(ic)}</span>`).join("")}</div>
           <div class="m-orb-ring r2"></div>
         </div>

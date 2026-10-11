@@ -16,7 +16,9 @@
   /* ------------------------------ Page loader ----------------------------- */
   const loader = document.createElement("div");
   loader.className = "loader";
-  loader.innerHTML = `<div class="loader-mark">${(window.SITE && window.SITE.brand.short) || "QT"}</div>`;
+  loader.innerHTML = window.QT_LOGO_MARK
+    ? `<div class="loader-mark has-svg">${window.QT_LOGO_MARK()}</div><div class="loader-name">${(window.SITE && window.SITE.brand.name) || ""}</div>`
+    : `<div class="loader-mark">${(window.SITE && window.SITE.brand.short) || "QT"}</div>`;
   document.body.appendChild(loader);
   const hideLoader = () => {
     loader.classList.add("done");
