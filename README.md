@@ -1,6 +1,6 @@
 # QSilon Tensorv — Company Website
 
-Website for **QSilon Tensorv**: software & AI solutions — AI automation, ERP, school management systems and websites.
+Website for **QSilon Tensorv**: software & AI automation — AI voice agents, ERP, school management systems and websites.
 
 Pure HTML + CSS + JavaScript. No build step, no framework. It runs on any static host (GitHub Pages, Netlify, Vercel, cPanel).
 

@@ -1243,3 +1243,117 @@ main { overflow-x: clip; }
 .m-core { padding: 0; background: none; overflow: hidden; }
 .m-core .qt-mark { width: 100%; height: 100%; }
 @media (max-width: 640px) { .logo-name { font-size: 1.05rem; } .logo-mark { width: 40px; height: 40px; } }
+
+/* ==========================================================================
+   Light theme polish — everything here is scoped to [data-theme="light"],
+   so the dark theme and all animations stay exactly as they are.
+   ========================================================================== */
+:root[data-theme="light"] {
+  --c1: #0891b2;
+  --c2: #7c3aed;
+  --c3: #db2777;
+  --bg: #f6f7fd;
+  --bg-2: #eef0fa;
+  --surface: #ffffff;
+  --surface-2: #f1f3fb;
+  --border: rgba(30, 41, 90, 0.10);
+  --text: #0b1130;
+  --muted: #4a5574;
+  --shadow: 0 1px 2px rgba(20, 30, 80, .05), 0 18px 44px -18px rgba(40, 50, 120, .28);
+  --lift: 0 1px 2px rgba(20, 30, 80, .05), 0 10px 28px -14px rgba(40, 50, 120, .22);
+}
+:root[data-theme="light"] body::before {
+  background:
+    radial-gradient(900px 520px at 88% -8%, rgba(124, 58, 237, .14), transparent 60%),
+    radial-gradient(760px 520px at -8% 18%, rgba(8, 145, 178, .12), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(219, 39, 119, .07), transparent 60%);
+}
+:root[data-theme="light"] .site-header.scrolled,
+:root[data-theme="light"] .site-header.open { background: rgba(255, 255, 255, .82); box-shadow: 0 6px 24px -16px rgba(30, 41, 90, .35); }
+:root[data-theme="light"] .nav a.active { background: #fff; box-shadow: var(--lift); }
+:root[data-theme="light"] .icon-btn,
+:root[data-theme="light"] .btn-ghost { background: #fff; box-shadow: var(--lift); }
+:root[data-theme="light"] .btn-ghost:hover { background: #fff; border-color: color-mix(in srgb, var(--c2) 40%, transparent); }
+:root[data-theme="light"] .badge { background: #fff; box-shadow: var(--lift); color: var(--muted); }
+
+/* Section bands */
+:root[data-theme="light"] .section.alt { background: linear-gradient(180deg, transparent, #eceffc 12%, #eef0fb 88%, transparent); }
+:root[data-theme="light"] .site-footer { background: #eceef9; }
+
+/* Cards & surfaces get depth instead of flat white */
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .ind,
+:root[data-theme="light"] .info-card,
+:root[data-theme="light"] .faq-item,
+:root[data-theme="light"] .sc-tab,
+:root[data-theme="light"] .marquee-track span { background-color: #fff; box-shadow: var(--lift); }
+:root[data-theme="light"] .card:hover { box-shadow: 0 2px 4px rgba(20, 30, 80, .05), 0 30px 60px -24px rgba(124, 58, 237, .35); }
+:root[data-theme="light"] .feature:hover { background-color: #fff; box-shadow: var(--lift); }
+:root[data-theme="light"] .sc-tab.on { box-shadow: 0 16px 36px -18px rgba(124, 58, 237, .45); }
+:root[data-theme="light"] .card.featured { background-color: #fbf9ff; border-color: rgba(124, 58, 237, .35); }
+:root[data-theme="light"] .ic-wrap { background: linear-gradient(135deg, rgba(8, 145, 178, .12), rgba(124, 58, 237, .14)); border-color: rgba(124, 58, 237, .15); }
+:root[data-theme="light"] .chips span { background: rgba(124, 58, 237, .08); border-color: rgba(124, 58, 237, .22); color: #3b2a7a; }
+:root[data-theme="light"] .tag { background: #f3f0ff; color: #5b3fc4; border-color: rgba(124, 58, 237, .2); }
+:root[data-theme="light"] .glass { background: rgba(255, 255, 255, .78); box-shadow: var(--shadow); }
+:root[data-theme="light"] .stats { background: #fff; }
+:root[data-theme="light"] .form { background: #fff; }
+:root[data-theme="light"] .field input,
+:root[data-theme="light"] .field select,
+:root[data-theme="light"] .field textarea { background: #f7f8fd; }
+:root[data-theme="light"] .page-header::after { opacity: .14; }
+
+/* Product screens: tinted stage so the white app windows stand out */
+:root[data-theme="light"] .detail-art {
+  background: linear-gradient(135deg, #e9edff 0%, #f3eeff 50%, #e6f7fb 100%);
+  border-color: rgba(124, 58, 237, .14);
+}
+:root[data-theme="light"] .detail-art::after { opacity: .28; }
+:root[data-theme="light"] .m-win,
+:root[data-theme="light"] .m-card,
+:root[data-theme="light"] .m-phone,
+:root[data-theme="light"] .m-transcript,
+:root[data-theme="light"] .m-node,
+:root[data-theme="light"] .m-log,
+:root[data-theme="light"] .m-canvas,
+:root[data-theme="light"] .x-phone,
+:root[data-theme="light"] .x-sprint,
+:root[data-theme="light"] .x-form-card,
+:root[data-theme="light"] .x-laptop,
+:root[data-theme="light"] .x-mobile,
+:root[data-theme="light"] .m-swatches,
+:root[data-theme="light"] .m-badges span,
+:root[data-theme="light"] .x-tags span,
+:root[data-theme="light"] .m-float,
+:root[data-theme="light"] .float,
+:root[data-theme="light"] .dash {
+  background: #fff;
+  border-color: rgba(30, 41, 90, .10);
+  box-shadow: 0 1px 2px rgba(20, 30, 80, .06), 0 22px 50px -24px rgba(40, 50, 120, .38);
+}
+:root[data-theme="light"] .m-bar { background: #f4f5fb; }
+:root[data-theme="light"] .x-fstep,
+:root[data-theme="light"] .x-steps > div:not(.m-t-head),
+:root[data-theme="light"] .m-deal,
+:root[data-theme="light"] .m-frame { background: #fff; }
+:root[data-theme="light"] .m-transcript .ai { background: #f1ebff; }
+:root[data-theme="light"] .m-transcript .user { background: #e3f6fb; }
+:root[data-theme="light"] .x-chat { background-color: #efeae2; background-image: radial-gradient(rgba(0, 0, 0, .05) 1px, transparent 1px); }
+:root[data-theme="light"] .x-chat .me { background: #d9fdd3; color: #111b21; }
+:root[data-theme="light"] .x-chat .bot { background: #fff; color: #111b21; }
+:root[data-theme="light"] .x-wa-head { background: #008069; }
+:root[data-theme="light"] .x-donut > span,
+:root[data-theme="light"] .m-orb-ring span { background: #fff; }
+:root[data-theme="light"] .ns-steps .ns-n { background: #fff; }
+:root[data-theme="light"] .step .ic-wrap { background: #fff; }
+:root[data-theme="light"] .ok { color: #15803d; }
+:root[data-theme="light"] .warn { color: #b45309; }
+:root[data-theme="light"] .up { color: #15803d; }
+:root[data-theme="light"] .x-paid,
+:root[data-theme="light"] .m-chip,
+:root[data-theme="light"] .m-fee { color: #15803d; }
+:root[data-theme="light"] .card.featured .ic-wrap,
+:root[data-theme="light"] .sc-tab.on .ic-wrap,
+:root[data-theme="light"] .card:hover .ic-wrap,
+:root[data-theme="light"] .step:hover .ic-wrap,
+:root[data-theme="light"] .feature:hover .ic-wrap,
+:root[data-theme="light"] .info-card:hover .ic-wrap { background: var(--grad); color: #fff; border-color: transparent; }

@@ -19,7 +19,7 @@ window.SITE = {
     // Optional: path to your own logo image (e.g. "assets/img/qsilon-tensorv-logo-dark.svg").
     // Leave "" to use the built-in animated logo (mark + full company name).
     logo: "",
-    tagline: "Software & AI Solutions",
+    tagline: "Software & AI Automation",
     description:
       "QSilon Tensorv builds custom software, AI voice agents, AI automations, ERP systems, school management systems and high-performance websites for growing businesses and institutions.",
   },
@@ -333,7 +333,7 @@ window.SITE = {
   about: {
     title: "Who we are",
     paragraphs: [
-      "QSilon Tensorv is a software and AI solutions company. We help businesses, schools and institutions replace manual work and scattered tools with smart, connected software.",
+      "QSilon Tensorv is a software and AI automation company. We help businesses, schools and institutions replace manual work and scattered tools with smart, connected software.",
       "Our team combines deep engineering skills with practical business understanding — so every ERP, school management system, website or automation we build solves a real problem and pays for itself.",
     ],
     // About page: "Inside QSilon" section
@@ -398,6 +398,6 @@ window.SITE = {
   },
 
   footer: {
-    text: "Software and AI solutions — ERP, school management systems and websites — built to help you grow.",
+    text: "Software and AI automation — ERP, school management systems and websites — built to help you grow.",
   },
 };
