@@ -24,6 +24,7 @@ Pure HTML + CSS + JavaScript. No build step, no framework. It runs on any static
   ```
   Available sections: `hero, pageHeader, techStrip, services, serviceDetails, solutions, solutionDetails, stats, process, industries, whyUs, techStack, about, values, testimonials, faq, cta, contact`.
 - **Add a service**: add an item to `services.items`. It automatically appears on the Home page, the Services page, the footer and the contact form dropdown.
+- **Service pictures**: every service on the Services page shows an animated product screen (`assets/js/mockups.js`). To show your own photo instead, put it in `assets/img/` and add `image: "assets/img/voice-ai.jpg"` to that service.
 - **Testimonials**: add real client quotes to `testimonials`, then add `"testimonials"` to a page layout.
 - **Colours**: change `--c1`, `--c2`, `--c3` at the top of `assets/css/style.css`.
 

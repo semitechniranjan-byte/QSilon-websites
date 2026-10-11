@@ -77,6 +77,15 @@
 
   const page = document.body.dataset.page || "home";
 
+  // Service visual: your own photo (image), else an animated product screen, else the icon
+  const MOCKUPS = window.QT_MOCKUPS || {};
+  const detailVisual = (x) => {
+    const fallback = MOCKUPS[x.id] ? MOCKUPS[x.id](icon) : `<div class="big-ic">${icon(x.icon)}</div>`;
+    if (!x.image) return fallback;
+    return `<img class="detail-img" src="${esc(x.image)}" alt="${esc(x.imageAlt || x.title)}" loading="lazy"
+      onerror="this.parentElement.classList.remove('has-img');this.outerHTML=this.nextElementSibling.innerHTML"/><template>${fallback}</template>`;
+  };
+
   /* ------------------------------ Sections ------------------------------- */
   const SECTIONS = {
     hero() {
@@ -171,8 +180,8 @@
             .map(
               (x, i) => `
             <article class="detail reveal ${i % 2 ? "flip" : ""}" id="${esc(x.id)}">
-              <div class="detail-art glass">
-                <div class="big-ic">${icon(x.icon)}</div>
+              <div class="detail-art glass${x.image ? " has-img" : ""}">
+                ${detailVisual(x)}
                 <span class="num">0${i + 1}</span>
               </div>
               <div class="detail-copy">
@@ -747,6 +756,15 @@
       }
     });
   }
+
+  // Live call timers in the voice mockup
+  $$("[data-timer]").forEach((el) => {
+    let sec = 0;
+    setInterval(() => {
+      sec = (sec + 1) % 600;
+      el.textContent = `${String(Math.floor(sec / 60)).padStart(2, "0")}:${String(sec % 60).padStart(2, "0")}`;
+    }, 1000);
+  });
 
   // Scroll to hash after dynamic render
   if (location.hash) {

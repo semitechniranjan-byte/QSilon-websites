@@ -6,6 +6,10 @@
    - `pages` controls which sections appear on each page and in what order.
      Re-order, remove or repeat section names to redesign a page.
    - Icons: use any name from the ICONS list at the top of assets/js/main.js.
+   - Service pictures: each service shows an animated product screen. To show
+     your own photo instead, put it in assets/img/ and add for example
+       image: "assets/img/voice-ai.jpg", imageAlt: "AI voice agent dashboard",
+     to that service below.
    ========================================================================== */
 
 window.SITE = {
