@@ -38,6 +38,20 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
+## Deploy on Render (recommended)
+This repo includes `render.yaml`, so Render sets everything up automatically.
+
+1. Sign in at [render.com](https://render.com) with GitHub.
+2. Click **New → Blueprint** and select the `QSilon-websites` repo.
+3. Click **Apply**. Render creates a free **Static Site** named `qsilon-tensorv`.
+4. In about a minute your site is live at `https://qsilon-tensorv.onrender.com` (or a similar URL).
+
+Every push to `main` redeploys automatically.
+
+**Manual option (without Blueprint):** New → **Static Site** → choose the repo → Branch `main`, Build Command: leave empty (or `echo ok`), Publish Directory: `.` → Create.
+
+**Custom domain:** Site → Settings → Custom Domains → add `www.yourdomain.com`, then add the DNS record Render shows you at your domain provider. HTTPS is free and automatic.
+
 ## Deploy on GitHub Pages
 Repo **Settings → Pages → Deploy from branch → `main` / root**.
 
