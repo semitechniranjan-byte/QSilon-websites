@@ -17,7 +17,8 @@ Pure HTML + CSS + JavaScript. No build step, no framework. It runs on any static
 **All content lives in one file: `assets/js/site-data.js`.**
 
 - **Text, services, FAQ, stats**: edit the matching block.
-- **Contact details**: edit `contact` (email, phone, WhatsApp, address, hours, optional Google Maps embed).
+- **Contact details**: edit `contact` (email, address, hours, optional Google Maps embed). Phone and WhatsApp are empty for now, so they are hidden; fill them in later and they appear automatically (contact page, footer and a floating WhatsApp button).
+- **"We will get back to you" section**: a quick Name / Contact / Mail ID form. Edit its text in `callback`, and add `"callback"` to any page in `pages` to show it there.
 - **Page design and order**: `pages` lists the sections shown on each page, in order. Re-order, remove or add sections. For example:
   ```js
   home: ["hero", "techStrip", "services", "showcase", "stats", "process", "industries", "whyUs", "blogLatest", "faq", "cta"],

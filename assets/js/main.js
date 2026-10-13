@@ -529,6 +529,33 @@
       </section>`;
     },
 
+    callback() {
+      const c = S.callback;
+      return `
+      <section class="section tight" id="callback">
+        <div class="container">
+          <div class="callback reveal">
+            <div class="cb-copy">
+              <div class="cb-ic">${icon("mail")}<span class="cb-ping"></span></div>
+              <div>
+                <h2>${c.title}</h2>
+                <p>${esc(c.text)}</p>
+                <a class="cb-mail" href="mailto:${esc(S.contact.email)}">${icon("send")} ${esc(S.contact.email)}</a>
+              </div>
+            </div>
+            <form class="callback-form" novalidate data-success="${esc(c.success)}">
+              <label class="field"><span>Name *</span><input name="name" required autocomplete="name" placeholder="Your name"/><small></small></label>
+              <label class="field"><span>Contact *</span><input name="contact" type="tel" required autocomplete="tel" placeholder="Phone number"/><small></small></label>
+              <label class="field"><span>Mail ID *</span><input name="email" type="email" required autocomplete="email" placeholder="you@company.com"/><small></small></label>
+              <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+              <button class="btn btn-primary" type="submit">${icon("send")} ${esc(c.button)}</button>
+              <div class="form-status" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>`;
+    },
+
     blogLatest() {
       const posts = blogPosts().slice(0, 3);
       if (!posts.length) return "";
@@ -664,7 +691,7 @@
       const unique = [...new Set(options)];
       const infos = [
         { icon: "mail", label: "Email us", value: c.email, href: `mailto:${c.email}` },
-        { icon: "phone", label: "Call us", value: c.phone, href: `tel:${c.phone.replace(/\s/g, "")}` },
+        c.phone && { icon: "phone", label: "Call us", value: c.phone, href: `tel:${c.phone.replace(/\s/g, "")}` },
         c.whatsapp && { icon: "whatsapp", label: "WhatsApp", value: "Chat with us", href: `https://wa.me/${c.whatsapp}` },
         { icon: "map", label: "Visit us", value: c.address },
         { icon: "clock", label: "Working hours", value: c.hours },
@@ -730,7 +757,6 @@
           <a class="btn btn-primary sm nav-cta" href="contact.html">Get a quote</a>
         </nav>
         <div class="nav-actions">
-          <button class="icon-btn" id="theme-toggle" aria-label="Toggle colour theme">${icon("sun", "sun")}${icon("moon", "moon")}</button>
           <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">${icon("menu", "i-open")}${icon("close", "i-close")}</button>
         </div>
       </div>
@@ -758,7 +784,7 @@
         <div>
           <h4>Get in touch</h4>
           <a href="mailto:${esc(c.email)}">${icon("mail")} ${esc(c.email)}</a>
-          <a href="tel:${esc(c.phone.replace(/\s/g, ""))}">${icon("phone")} ${esc(c.phone)}</a>
+          ${c.phone ? `<a href="tel:${esc(c.phone.replace(/\s/g, ""))}">${icon("phone")} ${esc(c.phone)}</a>` : ""}
           <span>${icon("map")} ${esc(c.address)}</span>
         </div>
       </div>
@@ -767,7 +793,9 @@
         <a href="#top" class="to-top">Back to top ↑</a>
       </div>
     </footer>
-    ${c.whatsapp ? `<a class="wa-float" href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${icon("whatsapp")}</a>` : ""}`;
+    ${c.whatsapp
+      ? `<a class="wa-float" href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${icon("whatsapp")}</a>`
+      : `<a class="wa-float mail-float" href="mailto:${esc(c.email)}" aria-label="Email us">${icon("mail")}</a>`}`;
   }
 
   /* ------------------------------- Render -------------------------------- */
@@ -805,11 +833,6 @@
 
   // Theme
   const root = document.documentElement;
-  $("#theme-toggle").addEventListener("click", () => {
-    const next = root.dataset.theme === "light" ? "dark" : "light";
-    root.dataset.theme = next;
-    try { localStorage.setItem("qt-theme", next); } catch (e) {}
-  });
 
   // Mobile menu
   const menuBtn = $("#menu-btn");
@@ -897,15 +920,10 @@
     })
   );
 
-  // Contact form
-  const form = $("#contact-form");
-  if (form) {
-    const preset = new URLSearchParams(location.search).get("service");
-    if (preset) {
-      const sel = form.service;
-      if ([...sel.options].some((o) => o.value === preset)) sel.value = preset;
-    }
-
+  // Forms (contact page + "We will get back to you" callback)
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE_RE = /^[+\d][\d\s()-]{6,}$/;
+  const setupForm = (form, rules, subject) => {
     const status = $(".form-status", form);
     const setErr = (input, msg) => {
       const field = input.closest(".field");
@@ -914,29 +932,21 @@
     };
     const validate = () => {
       let ok = true;
-      const v = (n) => form[n].value.trim();
-      const rules = [
-        ["name", v("name").length >= 2 ? "" : "Please enter your name."],
-        ["email", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("email")) ? "" : "Please enter a valid email."],
-        ["phone", !v("phone") || /^[+\d][\d\s()-]{6,}$/.test(v("phone")) ? "" : "Please enter a valid phone number."],
-        ["service", v("service") ? "" : "Please choose a service."],
-        ["message", v("message").length >= 10 ? "" : "Please add a few details (10+ characters)."],
-      ];
-      rules.forEach(([n, msg]) => {
-        setErr(form[n], msg);
-        if (msg) ok = false;
+      rules.forEach(([n, test, msg]) => {
+        const bad = !test(form[n].value.trim());
+        setErr(form[n], bad ? msg : "");
+        if (bad) ok = false;
       });
       return ok;
     };
     $$("input, select, textarea", form).forEach((el) =>
       el.addEventListener("input", () => el.closest(".field") && el.closest(".field").classList.contains("err") && validate())
     );
-
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       status.className = "form-status";
       status.textContent = "";
-      if (form._gotcha.value) return; // bot trap
+      if (form._gotcha && form._gotcha.value) return; // bot trap
       if (!validate()) {
         const first = $(".field.err input, .field.err select, .field.err textarea", form);
         first && first.focus();
@@ -949,7 +959,7 @@
 
       if (!endpoint) {
         const body = Object.entries(data).map(([k, v]) => `${k[0].toUpperCase() + k.slice(1)}: ${v}`).join("\n");
-        location.href = `mailto:${S.contact.email}?subject=${encodeURIComponent(`Project enquiry: ${data.service}`)}&body=${encodeURIComponent(body)}`;
+        location.href = `mailto:${S.contact.email}?subject=${encodeURIComponent(subject(data))}&body=${encodeURIComponent(body)}`;
         status.classList.add("ok");
         status.textContent = "Opening your email app… If nothing happens, email us at " + S.contact.email;
         return;
@@ -961,12 +971,12 @@
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, _subject: subject(data) }),
         });
         if (!res.ok) throw new Error(res.status);
         form.reset();
         status.classList.add("ok");
-        status.textContent = S.contactSection.successMessage;
+        status.textContent = form.dataset.success || S.contactSection.successMessage;
       } catch (err) {
         status.classList.add("bad");
         status.textContent = `Sorry, something went wrong. Please email us directly at ${S.contact.email}.`;
@@ -975,7 +985,38 @@
         submitBtn.classList.remove("loading");
       }
     });
+  };
+
+  const form = $("#contact-form");
+  if (form) {
+    const preset = new URLSearchParams(location.search).get("service");
+    if (preset) {
+      const sel = form.service;
+      if ([...sel.options].some((o) => o.value === preset)) sel.value = preset;
+    }
+    setupForm(
+      form,
+      [
+        ["name", (v) => v.length >= 2, "Please enter your name."],
+        ["email", (v) => EMAIL_RE.test(v), "Please enter a valid email."],
+        ["phone", (v) => !v || PHONE_RE.test(v), "Please enter a valid phone number."],
+        ["service", (v) => !!v, "Please choose a service."],
+        ["message", (v) => v.length >= 10, "Please add a few details (10+ characters)."],
+      ],
+      (d) => `Project enquiry: ${d.service}`
+    );
   }
+  $$(".callback-form").forEach((f) =>
+    setupForm(
+      f,
+      [
+        ["name", (v) => v.length >= 2, "Please enter your name."],
+        ["contact", (v) => PHONE_RE.test(v), "Please enter a valid contact number."],
+        ["email", (v) => EMAIL_RE.test(v), "Please enter a valid mail ID."],
+      ],
+      (d) => `Call back request: ${d.name}`
+    )
+  );
 
   // Live call timers in the voice mockup
   setInterval(() => {

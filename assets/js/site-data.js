@@ -27,8 +27,8 @@ window.SITE = {
   // TODO: replace with your real contact details.
   contact: {
     email: "hello@qsilontensorv.com",
-    phone: "+91 00000 00000",
-    whatsapp: "910000000000", // digits only, with country code. Leave "" to hide.
+    phone: "", // add a phone number later, e.g. "+91 98765 43210". Leave "" to hide.
+    whatsapp: "", // digits only with country code, e.g. "919876543210". Leave "" to hide.
     address: "Your office address, City, State, India",
     hours: "Mon – Sat, 9:30 AM – 7:00 PM IST",
     mapEmbed: "", // optional Google Maps embed URL (https://www.google.com/maps/embed?...)
@@ -54,11 +54,11 @@ window.SITE = {
 
   /* ---------- Page layouts: list section names in display order ---------- */
   pages: {
-    home: ["hero", "techStrip", "services", "showcase", "stats", "process", "industries", "whyUs", "blogLatest", "faq", "cta"],
-    services: ["pageHeader", "serviceDetails", "industries", "process", "techStack", "cta"],
-    about: ["pageHeader", "about", "missionVision", "teamWork", "expertise", "values", "stats", "whyUs", "cta"],
+    home: ["hero", "techStrip", "services", "showcase", "callback", "stats", "process", "industries", "whyUs", "blogLatest", "faq", "cta"],
+    services: ["pageHeader", "serviceDetails", "callback", "industries", "process", "techStack", "cta"],
+    about: ["pageHeader", "about", "missionVision", "teamWork", "expertise", "values", "stats", "whyUs", "callback", "cta"],
     contact: ["pageHeader", "contact", "nextSteps", "faq"],
-    blog: ["pageHeader", "blog", "cta"],
+    blog: ["pageHeader", "blog", "callback", "cta"],
   },
 
   /* ---------- Per-page headers (used by the "pageHeader" section) ---------- */
@@ -339,6 +339,14 @@ window.SITE = {
     text: "Book a free consultation and get a tailored plan for your ERP, school system, website or AI automation.",
     primary: { label: "Start your project", href: "contact.html" },
     secondary: { label: "Explore services", href: "services.html" },
+  },
+
+  // "We will get back to you" section (add "callback" to any page layout above)
+  callback: {
+    title: "We will get back to <span class='grad'>you</span>",
+    text: "Type your name, contact number and mail ID — our team will reach out within one business day.",
+    button: "Request a call back",
+    success: "Thank you! We have received your details and will get back to you shortly.",
   },
 
   contactSection: {

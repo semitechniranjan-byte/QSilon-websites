@@ -1472,3 +1472,30 @@ main { overflow-x: clip; }
 .post-fig figcaption { margin-top: .8rem; text-align: center; color: var(--muted); font-size: .92rem; font-style: italic; }
 .post-hero { margin-top: 0; }
 @media (max-width: 640px) { .pc-shot .mock { font-size: .7rem; } }
+
+/* ---------- "We will get back to you" callback ---------- */
+.callback {
+  position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 1.25fr; gap: 2.5rem; align-items: center;
+  padding: 2.4rem; border-radius: 24px; background: #fff; border: 1px solid rgba(124, 58, 237, .18);
+  box-shadow: 0 1px 2px rgba(20, 30, 80, .05), 0 30px 70px -30px rgba(124, 58, 237, .35);
+}
+.callback::before { content: ""; position: absolute; width: 420px; height: 420px; right: -160px; top: -200px; border-radius: 50%; background: var(--grad); filter: blur(90px); opacity: .18; pointer-events: none; }
+.cb-copy { position: relative; display: flex; gap: 1.2rem; align-items: flex-start; }
+.cb-copy h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: .4rem; }
+.cb-copy p { color: var(--muted); margin-bottom: .9rem; }
+.cb-ic { position: relative; flex-shrink: 0; width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center; background: var(--grad); color: #fff; box-shadow: 0 14px 30px -12px rgba(124, 58, 237, .7); animation: float 5s ease-in-out infinite; }
+.cb-ic .ic { width: 28px; height: 28px; }
+.cb-ping { position: absolute; top: -4px; right: -4px; width: 14px; height: 14px; border-radius: 50%; background: #22c55e; border: 2px solid #fff; }
+.cb-ping::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; background: #22c55e; animation: waPulse 1.8s ease-out infinite; z-index: -1; }
+.cb-mail { display: inline-flex; align-items: center; gap: .45rem; font-weight: 600; color: var(--c2); }
+.cb-mail:hover { text-decoration: underline; }
+.callback-form { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem 1rem; align-items: start; }
+.callback-form .btn { grid-column: 1 / -1; justify-self: start; }
+.callback-form .form-status { grid-column: 1 / -1; margin-top: 0; }
+.mail-float { background: var(--grad); box-shadow: 0 12px 30px -8px rgba(124, 58, 237, .7); }
+.mail-float::before { background: var(--c2); }
+@media (max-width: 920px) {
+  .callback { grid-template-columns: 1fr; padding: 1.8rem; }
+  .callback-form { grid-template-columns: 1fr; }
+  .callback-form .btn { justify-self: stretch; }
+}
