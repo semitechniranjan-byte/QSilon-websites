@@ -1499,3 +1499,34 @@ main { overflow-x: clip; }
   .callback-form { grid-template-columns: 1fr; }
   .callback-form .btn { justify-self: stretch; }
 }
+
+/* ==========================================================================
+   Light-only site: soft, light versions of the remaining dark blocks
+   ========================================================================== */
+/* CTA band */
+:root[data-theme="light"] .cta {
+  background: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 55%, #fce7f3 100%);
+  color: var(--text); border: 1px solid rgba(124, 58, 237, .18);
+  box-shadow: 0 1px 2px rgba(20, 30, 80, .05), 0 30px 70px -30px rgba(124, 58, 237, .35);
+}
+:root[data-theme="light"] .cta p { color: var(--muted); }
+:root[data-theme="light"] .cta .btn-ghost { color: var(--text); background: #fff; border-color: rgba(124, 58, 237, .25); }
+:root[data-theme="light"] .cta-glow { opacity: .22; }
+/* Blog article CTA */
+:root[data-theme="light"] .post-cta { background: linear-gradient(135deg, #ede9fe, #e0f2fe); color: var(--text); border: 1px solid rgba(124, 58, 237, .18); }
+:root[data-theme="light"] .post-cta p { color: var(--muted); }
+/* DevOps terminal */
+:root[data-theme="light"] .m-term { background: #f8fafc; color: #334155; border: 1px solid var(--border); }
+:root[data-theme="light"] .m-term div:last-child { color: #15803d; }
+/* Stand-up meeting tiles */
+:root[data-theme="light"] .x-tile.a { background: linear-gradient(135deg, #dbeafe, #c7d2fe); }
+:root[data-theme="light"] .x-tile.b { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+:root[data-theme="light"] .x-tile.c { background: linear-gradient(135deg, #ccfbf1, #cffafe); }
+:root[data-theme="light"] .x-tile.d { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+:root[data-theme="light"] .x-tile.e { background: linear-gradient(135deg, #fef3c7, #fed7aa); }
+:root[data-theme="light"] .x-tile.f { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+:root[data-theme="light"] .x-face { background: #fff; color: #3b2a7a; box-shadow: 0 4px 12px -4px rgba(40, 50, 120, .3); }
+:root[data-theme="light"] .x-tile small { color: #334155; }
+/* Cards: consistent soft borders and spacing */
+:root[data-theme="light"] .card, :root[data-theme="light"] .ind, :root[data-theme="light"] .info-card { border-color: rgba(30, 41, 90, .08); }
+:root[data-theme="light"] .stats { border: 1px solid rgba(30, 41, 90, .08); }
